@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from "react";
 import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
-import { RootStackParamList } from "./src/NavigationTypes/navigationTypes"
-import SplashScreen from "./src/pages/SplashScreen/SplashScreen"; 
-import Login from "./src/pages/Login/Login"; 
+import { RootStackParamList } from "./src/NavigationTypes/navigationTypes";
+import SplashScreen from "./src/pages/SplashScreen/SplashScreen";
+import Login from "./src/pages/Login/Login";
 import Register from "./src/pages/Register/Register";
 import HomeScreen from "./src/pages/HomeScreen/HomeScreen";
 
@@ -31,13 +31,24 @@ function App() {
     <NavigationContainer>
       {/* Tela de Login como a primeira tela após o SplashScreen */}
       <Stack.Navigator initialRouteName="Login">
-        <Stack.Screen name="Login" component={Login} options={{ headerShown: false }} />
-        <Stack.Screen name="Register" component={Register} options={{ headerShown: false, title: "Cadastro" }} />
-        <Stack.Screen name="HomeScreen" component={HomeScreen} options={{ headerShown: false }} /> 
+        <Stack.Screen
+          name="Login"
+          component={Login}
+          options={{ headerShown: false }}
+        />
+        <Stack.Screen
+          name="Register"
+          component={Register}
+          options={{ headerShown: false, title: "Cadastro" }}
+        />
+        <Stack.Screen
+          name="HomeScreen"
+          component={HomeScreen}
+          options={{ headerShown: false }}
+        />
       </Stack.Navigator>
     </NavigationContainer>
   );
- 
 }
 
 export default App;
