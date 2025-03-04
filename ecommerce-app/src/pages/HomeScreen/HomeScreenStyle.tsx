@@ -67,7 +67,7 @@ export default StyleSheet.create({
     width: "48%", // Mantém 2 produtos por linha
     height: 260, 
     borderRadius: 16,
-    backgroundColor: "#FFFFFF",
+    backgroundColor: "#f7f7f7",
     alignItems: "center",
     padding: 14,
     justifyContent: "space-between",
