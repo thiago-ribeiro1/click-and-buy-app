@@ -1,6 +1,74 @@
-# click-and-buy-app
-Click &amp; Buy - React Native App
+# 🛒 Click&Buy
+
+Aplicação mobile desenvolvida em **React Native** que permite aos usuários se cadastrarem, efetuarem login, visualizar produtos, adicionar ao carrinho, remover produtos e finalizar pedidos.
 
 <img src="https://img.shields.io/badge/React_Native-20232A?style=for-the-badge&logo=react&logoColor=61DAFB" alt="React Native" />
 
 ![Image](https://github.com/user-attachments/assets/1e79e291-5919-4bb4-8a99-41acce74b350)
+
+## 📱 Tecnologias Utilizadas
+
+- **React Native** - Framework para desenvolvimento mobile
+- **TypeScript** - Tipagem segura para JavaScript
+- **React Navigation** - Navegação entre telas
+- **Context API** - Gerenciamento de estado global
+
+## 🚀 Funcionalidades
+
+- Cadastro e login de usuários
+- Listagem de produtos com preços promocionais
+- Adição e remoção de itens no carrinho
+- Atualização dinâmica do valor total no carrinho
+- Persistência do carrinho entre sessões
+- Finalização do pedido
+
+## 📦 Principais Pacotes Utilizados
+
+| Pacote                 | Descrição |
+|------------------------|-----------|
+| react-native          | Framework para desenvolvimento mobile |
+| react-navigation      | Navegação entre telas |
+| StackNavigationProp   | Tipagem para navegação stack no TypeScript |
+| useEffect             | Hook para efeitos colaterais e ciclo de vida |
+| useState              | Hook para gerenciar estados locais no React |
+
+## 📱 Telas do Aplicativo
+
+### 🔹 Splash Screen
+Tela inicial exibida enquanto o app é carregado.
+
+### 🔹 Login & Cadastro
+Tela para login e criação de novos usuários.
+
+### 🔹 HomeScreen
+Exibição dos produtos disponíveis.
+
+### 🔹 Carrinho
+Lista dos produtos adicionados ao carrinho, com opções para remover itens e finalizar a compra.
+
+### 🔹 Pedido Finalizado
+Informa ao usuário que o pedido foi finalizado, completando o processo de compra.
+
+## 🛠 Como Utilizar
+
+### 1️⃣ Pré-requisitos
+
+- Node.js instalado (recomendável versão 23 ou posterior)
+- Expo CLI instalado:
+  \`\`\`
+  npm install -g expo-cli
+  \`\`\`
+
+### 2️⃣ Instalar Dependências
+
+```bash
+npm install
+```
+
+### 3️⃣ Executar o App
+
+Para iniciar o aplicativo, utilize:
+
+```bash
+npx expo start
+```
