@@ -54,6 +54,7 @@ Informa ao usuário que o pedido foi finalizado, completando o processo de compr
 ### 1️⃣ Pré-requisitos
 
 - Node.js instalado (recomendável versão 23 ou posterior)
+- Fazer download do app "Expo Go" para exibição da interface
 - Expo CLI instalado:
   \`\`\`
   npm install -g expo-cli
@@ -72,3 +73,5 @@ Para iniciar o aplicativo, utilize:
 ```bash
 npx expo start
 ```
+
+Escaneie o QR Code e espere carregar a aplicação
