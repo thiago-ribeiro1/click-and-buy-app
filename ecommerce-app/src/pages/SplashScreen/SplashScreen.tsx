@@ -1,7 +1,8 @@
 import React from "react";
 import { StyleSheet, View, Image, StatusBar } from "react-native";
 
-const PaginaInicial: React.FC = () => {
+// Página Inicial
+const SplashScreen: React.FC = () => {
   return (
     <View style={styles.container}>
         <StatusBar backgroundColor="#0B8FAC" barStyle="light-content" />
@@ -13,7 +14,7 @@ const PaginaInicial: React.FC = () => {
   );
 };
 
-export default PaginaInicial;
+export default SplashScreen;
 
 const styles = StyleSheet.create({
   container: {

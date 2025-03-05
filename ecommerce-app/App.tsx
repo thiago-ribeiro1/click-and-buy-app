@@ -6,6 +6,9 @@ import SplashScreen from "./src/pages/SplashScreen/SplashScreen";
 import Login from "./src/pages/Login/Login";
 import Register from "./src/pages/Register/Register";
 import HomeScreen from "./src/pages/HomeScreen/HomeScreen";
+import Cart from "./src/pages/Cart/Cart";
+import { CartProvider } from "./src/pages/Cart/CartContext";
+import OrderPlaced from "./src/pages/OrderPlaced/OrderPlaced";
 
 // Criação do Stack Navigator tipado com RootStackParamList
 const Stack = createStackNavigator<RootStackParamList>();
@@ -28,6 +31,7 @@ function App() {
   }
 
   return (
+    <CartProvider>
     <NavigationContainer>
       {/* Tela de Login como a primeira tela após o SplashScreen */}
       <Stack.Navigator initialRouteName="Login">
@@ -46,8 +50,19 @@ function App() {
           component={HomeScreen}
           options={{ headerShown: false }}
         />
+        <Stack.Screen
+          name="Cart"
+          component={Cart}
+          options={{ headerShown: false, title: "Carrinho" }}
+        />
+        <Stack.Screen
+          name="OrderPlaced"
+          component={OrderPlaced}
+          options={{ headerShown: false }}
+        />
       </Stack.Navigator>
     </NavigationContainer>
+    </CartProvider>
   );
 }
 

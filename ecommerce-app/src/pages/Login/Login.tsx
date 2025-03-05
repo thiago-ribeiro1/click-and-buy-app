@@ -19,6 +19,7 @@ const Login: React.FC = () => {
     value: "",
     dirty: false,
   });
+  
   const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
   const showMessage = (type: string, title: string, message: string) => {

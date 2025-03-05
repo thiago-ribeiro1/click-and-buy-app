@@ -74,7 +74,7 @@ export default StyleSheet.create({
   error: {
     width: "100%",
     marginBottom: "2%",
-    color: "#E43E84",
+    color: "red",
     fontWeight: "bold",
   },
 });

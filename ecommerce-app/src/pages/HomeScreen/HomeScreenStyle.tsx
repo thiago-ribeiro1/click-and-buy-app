@@ -8,7 +8,7 @@ export default StyleSheet.create({
     paddingTop: 20,
   },
 
-  // 🔹 HEADER - Avatar e Logout
+  // HEADER - Avatar e Logout
   Header: {
     flexDirection: "row",
     justifyContent: "space-between",
@@ -25,7 +25,7 @@ export default StyleSheet.create({
     height: 32,
   },
 
-  // 🔹 SEARCH BAR
+  // SEARCH BAR
   SearchContainer: {
     flexDirection: "row",
     alignItems: "center",
@@ -46,15 +46,15 @@ export default StyleSheet.create({
     color: "#333",
   },
 
-  // 🔹 Título "Produtos"
-  Produtos: {
+  // Título "Produtos"
+  Products: {
     fontSize: 20,
     fontWeight: "bold",
     color: "#333",
     marginBottom: 14,
   },
 
-  // 🔹 GRID DE PRODUTOS
+  // GRID DE PRODUTOS
   ProductsContainer: {
     flexDirection: "row",
     flexWrap: "wrap",
@@ -62,12 +62,12 @@ export default StyleSheet.create({
     gap: 12, // 🔹 Melhor espaçamento entre os cards
   },
 
-  // 🔹 CARTÃO DE PRODUTO
+  // CARTÃO DE PRODUTO
   ProductCard: {
     width: "48%", // Mantém 2 produtos por linha
     height: 260, 
     borderRadius: 16,
-    backgroundColor: "#f7f7f7",
+    backgroundColor: "#f8f8f8",
     alignItems: "center",
     padding: 14,
     justifyContent: "space-between",
@@ -89,7 +89,7 @@ export default StyleSheet.create({
     textAlign: "center",
   },
 
-  // 🔹 PREÇO
+  // PREÇO
   PriceContainer: {
     alignItems: "center",
     justifyContent: "center",
@@ -106,15 +106,15 @@ export default StyleSheet.create({
     color: "#272727",
   },
 
-  // 🔹 ÍCONE DA SACOLA 
+  // ÍCONE DA SACOLA 
   BagContainer: {
     position: "absolute",
-    top: 8, // 🔹 Alinhado no canto superior direito
+    top: 8, // Alinhado no canto superior direito
     right: 8,
     backgroundColor: "#FFF",
     borderRadius: 20,
     padding: 6,
-    elevation: 2,
+    elevation: 3,
   },
   BagIcon: {
     width: 20,
