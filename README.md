@@ -53,12 +53,12 @@ Informa ao usuário que o pedido foi finalizado, completando o processo de compr
 
 ### 1️⃣ Pré-requisitos
 
-- Node.js instalado (recomendável versão 23 ou posterior)
+- Node.js instalado (recomendável versão 23)
 - Fazer download do app "Expo Go" para exibição da interface
 - Expo CLI instalado:
-  \`\`\`
+  ```bash
   npm install -g expo-cli
-  \`\`\`
+  ```
 
 ### 2️⃣ Instalar Dependências
 
