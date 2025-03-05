@@ -19,7 +19,6 @@ Aplicação mobile desenvolvida em **React Native** que permite aos usuários se
 - Listagem de produtos com preços promocionais
 - Adição e remoção de itens no carrinho
 - Atualização dinâmica do valor total no carrinho
-- Persistência do carrinho entre sessões
 - Finalização do pedido
 
 ## 📦 Principais Pacotes Utilizados
