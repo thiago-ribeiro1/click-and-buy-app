@@ -73,9 +73,10 @@ ECOMMERCE-APP/
 - Node.js instalado (recomendável versão 23)
 - Fazer download do app "Expo Go" para exibição da interface
 - Expo CLI instalado:
-  ```bash
-  npm install -g expo-cli
-  ```
+  
+```bash
+npm install -g expo-cli
+```
 
 ### 2️⃣ Instalar Dependências
 
