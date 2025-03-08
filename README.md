@@ -66,23 +66,6 @@ ECOMMERCE-APP/
 
 ```
 
-## 📱 Telas do Aplicativo
-
-### 🔹 Splash Screen
-Tela inicial exibida enquanto o app é carregado.
-
-### 🔹 Login & Cadastro
-Tela para login e criação de novos usuários.
-
-### 🔹 HomeScreen
-Exibição dos produtos disponíveis.
-
-### 🔹 Carrinho
-Lista dos produtos adicionados ao carrinho, com opções para remover itens e finalizar a compra.
-
-### 🔹 Pedido Finalizado
-Informa ao usuário que o pedido foi finalizado, completando o processo de compra.
-
 ## 🛠 Como Utilizar
 
 ### 1️⃣ Pré-requisitos
@@ -109,3 +92,20 @@ npx expo start
 ```
 
 Escaneie o QR Code e espere carregar a aplicação
+
+## 📱 Telas do Aplicativo
+
+### 🔹 Splash Screen
+Tela inicial exibida enquanto o app é carregado.
+
+### 🔹 Login & Cadastro
+Tela para login e criação de novos usuários.
+
+### 🔹 HomeScreen
+Exibição dos produtos disponíveis.
+
+### 🔹 Carrinho
+Lista dos produtos adicionados ao carrinho, com opções para remover itens e finalizar a compra.
+
+### 🔹 Pedido Finalizado
+Informa ao usuário que o pedido foi finalizado, completando o processo de compra.
