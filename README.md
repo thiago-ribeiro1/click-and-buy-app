@@ -84,7 +84,7 @@ ECOMMERCE-APP/
 │   └── index.tsx         # Arquivo de entrada principal
 │── assets/               # Recursos do projeto (imagens, fontes, etc.)
 │   ├── fonts/            # Arquivos de fontes personalizados
-│   ├── images/           # Diretório padrão do React Native para imagens
+│   ├── images/           # Imagens padrão do React - Logo, Icon...
 │   └── img/              # Imagens utilizadas na aplicação
 │── components/           # Componentes reutilizáveis
 │── constants/            # Constantes e configurações globais
