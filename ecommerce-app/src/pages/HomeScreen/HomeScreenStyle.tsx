@@ -62,6 +62,18 @@ export default StyleSheet.create({
     gap: 12, // 🔹 Melhor espaçamento entre os cards
   },
 
+  ProductsHeader: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+    alignItems: "center",
+    marginBottom: 14,
+  },
+  SortIcon: {
+    width: 24,
+    height: 24,
+    tintColor: "#333", 
+  },
+
   // CARTÃO DE PRODUTO
   ProductCard: {
     width: "48%", // Mantém 2 produtos por linha
@@ -88,7 +100,7 @@ export default StyleSheet.create({
     color: "#272727",
     textAlign: "center",
   },
-
+  
   // PREÇO
   PriceContainer: {
     alignItems: "center",

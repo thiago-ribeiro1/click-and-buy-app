@@ -18,7 +18,9 @@ const Homepage: React.FC = () => {
   };
 
   const [searchText, setSearchText] = useState(""); // Estado da busca
+  const [isSorted, setIsSorted] = useState(false); // Estado para controlar a ordenação
 
+  // Lista de produtos
   const products = [
     { id: "1", title: "Tênis Lacoste", price: 269.99, image: require("../../../assets/img/tenis-lacoste.png") },
     { id: "2", title: "Mouse Redragon", price: 135.00, image: require("../../../assets/img/mouse-redragon.png") },
@@ -34,17 +36,22 @@ const Homepage: React.FC = () => {
     { id: "12", title: "Teclado Gamer", price: 89.00, image: require("../../../assets/img/teclado-gamer.png") }
   ];
 
-  // Filtrar os produtos conforme o texto da busca
-  const filteredProducts = products.filter((product) =>
+  // Função para ordenar os produtos
+  const sortedProducts = isSorted
+    ? [...products].sort((a, b) => a.title.localeCompare(b.title)) // Ordena em ordem alfabética
+    : products;
+
+  // Filtra os produtos conforme o texto da busca (aplicado após a ordenação)
+  const filteredProducts = sortedProducts.filter((product) =>
     product.title.toLowerCase().includes(searchText.toLowerCase())
   );
-  
+
   return (
     <ScrollView style={styles.Homepage} contentContainerStyle={{ paddingBottom: 20 }} showsVerticalScrollIndicator={false}>
       {/* Header com Avatar e Logout */}
       <View style={styles.Header}>
         <Image style={styles.Avatar} source={require("../../../assets/img/avatar.png")} />
-        <TouchableOpacity onPress={() => navigation.navigate("Login")}>
+        <TouchableOpacity onPress={() => navigation.navigate("Login")}> 
           <Image style={styles.Logout} source={require("../../../assets/img/logout.png")} />
         </TouchableOpacity>
       </View>
@@ -61,10 +68,18 @@ const Homepage: React.FC = () => {
         />
       </View>
 
-      {/* Título Produtos */}
-      <Text style={styles.Products}>Produtos</Text>
+      {/* Título Produtos + Ícone de Ordenação */}
+      <View style={styles.ProductsHeader}>
+        <Text style={styles.Products}>Produtos</Text>
+        <TouchableOpacity onPress={() => setIsSorted(!isSorted)}>
+          <Image 
+            style={styles.SortIcon} 
+            source={require("../../../assets/img/sort.png")} 
+          /> 
+        </TouchableOpacity>
+      </View>
 
-      {/* Lista de produtos filtrados */}
+      {/* Lista de produtos filtrados busca */}
       <View style={styles.ProductsContainer}>
         {filteredProducts.map((product) => (
           <View key={product.id} style={styles.ProductCard}>
@@ -74,7 +89,8 @@ const Homepage: React.FC = () => {
               <Text style={styles.OldPrice}>R${(product.price * 1.1).toFixed(2)}</Text>
               <Text style={styles.ProductPrice}>R${product.price.toFixed(2)}</Text>
             </View>
-            <TouchableOpacity
+            {/* Redireciona para tela de carrinho */}
+            <TouchableOpacity  
               onPress={() => handleAddToCart(product)}
               style={styles.BagContainer}
             >
