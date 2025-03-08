@@ -48,10 +48,17 @@ const Homepage: React.FC = () => {
 
   return (
     <ScrollView style={styles.Homepage} contentContainerStyle={{ paddingBottom: 20 }} showsVerticalScrollIndicator={false}>
-      {/* Header com Avatar e Logout */}
+      {/* Header com Avatar Logo e Logout */}
       <View style={styles.Header}>
+
+        {/* Avatar */}
         <Image style={styles.Avatar} source={require("../../../assets/img/avatar.png")} />
-        <TouchableOpacity onPress={() => navigation.navigate("Login")}> 
+        
+        {/* Logo */}  
+        <Image style={styles.Logo} source={require("../../../assets/img/click&buy.png")} /> 
+
+        {/* Logout */}
+        <TouchableOpacity onPress={() => navigation.navigate("Login")}>      
           <Image style={styles.Logout} source={require("../../../assets/img/logout.png")} />
         </TouchableOpacity>
       </View>

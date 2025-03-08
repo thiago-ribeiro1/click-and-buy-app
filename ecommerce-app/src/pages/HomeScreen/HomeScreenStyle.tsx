@@ -8,7 +8,7 @@ export default StyleSheet.create({
     paddingTop: 20,
   },
 
-  // HEADER - Avatar e Logout
+  // HEADER - Avatar, Logo e Logout
   Header: {
     flexDirection: "row",
     justifyContent: "space-between",
@@ -23,6 +23,14 @@ export default StyleSheet.create({
   Logout: {
     width: 32,
     height: 32,
+  },
+  Logo: {
+    width: 120, 
+    height: 40, 
+    resizeMode: "contain",
+    position: "absolute", // Mantém no centro sem afetar o layout
+    left: "50%", // Move a logo para o centro
+    transform: [{ translateX: -60 }], // Metade da largura da logo para alinhamento correto
   },
 
   // SEARCH BAR
