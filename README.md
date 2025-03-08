@@ -74,3 +74,39 @@ npx expo start
 ```
 
 Escaneie o QR Code e espere carregar a aplicação
+
+## 📂 Estrutura de Diretórios
+
+```bash
+ECOMMERCE-APP/
+│── .expo/                # Diretório gerenciado pelo Expo
+│── app/
+│   └── index.tsx         # Arquivo de entrada principal
+│── assets/               # Recursos do projeto (imagens, fontes, etc.)
+│   ├── fonts/            # Arquivos de fontes personalizados
+│   ├── images/           # Diretório padrão do React Native para imagens
+│   └── img/              # Imagens utilizadas na aplicação
+│── components/           # Componentes reutilizáveis
+│── constants/            # Constantes e configurações globais
+│── hooks/                # Custom Hooks
+│── node_modules/         # Dependências do projeto
+│── scripts/              # Scripts auxiliares
+│── src/                  # Código principal do app
+│   ├── NavigationTypes/  # Tipos de navegação
+│   ├── pages/            # Páginas do aplicativo
+│   │   ├── Cart/         # Tela do carrinho
+│   │   ├── HomeScreen/   # Tela principal
+│   │   ├── Login/        # Tela de login
+│   │   ├── OrderPlaced/  # Tela de pedido concluído
+│   │   ├── Register/     # Tela de registro de usuário
+│   │   └── SplashScreen/ # Tela de carregamento inicial
+│── .gitignore            # Arquivo para ignorar arquivos no Git
+│── app.json              # Configurações do aplicativo Expo
+│── App.tsx               # Componente raiz do aplicativo
+│── expo-env.d.ts         # Configurações de ambiente do Expo
+│── package-lock.json     # Arquivo de bloqueio de versões do npm
+│── package.json          # Configurações do projeto e dependências
+│── tsconfig.json         # Configuração do TypeScript
+
+```
+
