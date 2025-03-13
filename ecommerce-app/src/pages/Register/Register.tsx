@@ -96,7 +96,7 @@ const Cadastrar: React.FC = () => {
         "Usuário cadastrado !!!",
         "Credenciais cadastradas com sucesso"
       );
-      navigation.navigate("HomeScreen");
+      navigation.navigate("Login");
     } else {
       showMessage("error", "Erro", "Credenciais inválidas");
     }
@@ -158,8 +158,8 @@ const Cadastrar: React.FC = () => {
         {handleErrorPassword()}
 
         {/* Botão de Cadastrar */}
-        <TouchableOpacity style={styles.registerButton}>
-          <Text style={styles.registerButtonText} onPress={validForm}>
+        <TouchableOpacity style={styles.registerButton} onPress={validForm}>
+          <Text style={styles.registerButtonText}>
             Cadastrar
           </Text>
         </TouchableOpacity>
