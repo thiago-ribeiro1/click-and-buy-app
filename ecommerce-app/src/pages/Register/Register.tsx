@@ -18,7 +18,7 @@ const Cadastrar: React.FC = () => {
     value: "",
     dirty: false,
   });
-  const [usernameInput, setUsernameInput] = useState({
+  const [cpfInput, setCpfInput] = useState({
     value: "",
     dirty: false,
   });
@@ -27,7 +27,11 @@ const Cadastrar: React.FC = () => {
     value: "",
     dirty: false,
   });
+
+  // Regex
   const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  const cpfRegex = /^\d{3}\.\d{3}\.\d{3}-\d{2}$/;
+
 
   const showMessage = (type: string, title: string, message: string) => {
     Toast.show({
@@ -45,9 +49,11 @@ const Cadastrar: React.FC = () => {
     }
   };
 
-  const handleErrorUsername = () => {
-    if (!usernameInput.value && usernameInput.dirty) {
+  const handleErrorCpf = () => {
+    if (!cpfInput.value && cpfInput.dirty) {
       return <Text style={styles.error}>Campo Obrigatório*</Text>;
+    } else if (!cpfRegex.test(cpfInput.value) && cpfInput.dirty) {
+      return <Text style={styles.error}>CPF inválido*</Text>;
     } else {
       return <Text style={styles.error}> </Text>;
     }
@@ -77,8 +83,8 @@ const Cadastrar: React.FC = () => {
       setFullNameInput({ ...fullNameInput, dirty: true });
       hasError = true;
     }
-    if (!usernameInput.value) {
-      setUsernameInput({ ...usernameInput, dirty: true });
+    if (!cpfInput.value) {
+      setCpfInput({ ...cpfInput, dirty: true });
       hasError = true;
     }
     if (!emailRegex.test(emailInput.value) || !emailInput.value) {
@@ -131,13 +137,13 @@ const Cadastrar: React.FC = () => {
         {handleErrorFullName()}
         <TextInput
           onChangeText={(text) =>
-            setUsernameInput({ value: text, dirty: true })
+            setCpfInput({ value: text, dirty: true })
           }
           style={styles.input}
-          placeholder="Username"
+          placeholder="CPF"
           placeholderTextColor="#777"
         />
-        {handleErrorUsername()}
+        {handleErrorCpf()}
         <TextInput
           onChangeText={(text) => setEmailInput({ value: text, dirty: true })}
           style={styles.input}
