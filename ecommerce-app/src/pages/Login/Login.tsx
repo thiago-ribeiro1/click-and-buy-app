@@ -101,7 +101,7 @@ const Login: React.FC = () => {
           style={styles.registerLink}
           onPress={() => navigation.navigate("Register")}
         >
-          Cadastre-se
+          Crie uma
         </Text>
       </Text>
     </View>
