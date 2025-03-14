@@ -4,7 +4,7 @@ Aplicação mobile desenvolvida em **React Native** que permite aos usuários se
 
 <img src="https://img.shields.io/badge/React_Native-20232A?style=for-the-badge&logo=react&logoColor=61DAFB" alt="React Native" />
 
-![Image](https://github.com/user-attachments/assets/2625008f-6cfb-4056-9907-f38f78289307)
+![Image](https://github.com/user-attachments/assets/22d0c934-d287-45b4-879d-23bf85a0c12a)
 
 ## 📱 Tecnologias Utilizadas
 
