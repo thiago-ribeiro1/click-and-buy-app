@@ -135,9 +135,37 @@ export default StyleSheet.create({
     borderRadius: 20,
     padding: 6,
     elevation: 3,
-  },
+  }, 
   BagIcon: {
     width: 20,
     height: 20,
+  },
+  /* Menu */ 
+  MenuIcon: {
+    width: 40,
+    height: 40,
+  },
+  MenuContainer: {
+    position: "absolute",
+    top: 65,
+    right: 20,
+    backgroundColor: "#fff",
+    borderRadius: 8,
+    shadowColor: "#000",
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.2,
+    shadowRadius: 4,
+    elevation: 5,
+    paddingVertical: 10,
+    paddingHorizontal: 15,
+    zIndex: 10,
+  },
+  MenuItem: {
+    paddingVertical: 10,
+  },
+  MenuText: {
+    fontSize: 16,
+    color: "#333",
+    fontWeight: "500",
   },
 });

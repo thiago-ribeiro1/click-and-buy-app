@@ -27,6 +27,10 @@ const Cadastrar: React.FC = () => {
     value: "",
     dirty: false,
   });
+  const [confirmPasswordInput, setConfirmPasswordInput] = useState({
+    value: "",
+    dirty: false,
+  });
 
   // Regex
   const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -42,12 +46,16 @@ const Cadastrar: React.FC = () => {
   };
 
   const handleErrorFullName = () => {
-    if (!fullNameInput.value && fullNameInput.dirty) {
-      return <Text style={styles.error}>Campo Obrigatório*</Text>;
-    } else {
-      return <Text style={styles.error}> </Text>;
+    const name = fullNameInput.value.trim();
+  
+    // verifica se tem pelo menos dois caracteres
+    if (fullNameInput.dirty && name.length < 2) {
+      return <Text style={styles.error}>{name ? "Digite pelo menos dois caracteres*" : "Campo Obrigatório*"}</Text>;
     }
+  
+    return <Text style={styles.error}> </Text>;
   };
+  
 
   const handleErrorCpf = () => {
     if (!cpfInput.value && cpfInput.dirty) {
@@ -69,6 +77,19 @@ const Cadastrar: React.FC = () => {
     }
   };
 
+  const handleErrorPasswordMatch = () => {
+    if (!confirmPasswordInput.value && confirmPasswordInput.dirty) {
+      return <Text style={styles.error}>Campo Obrigatório*</Text>;
+    } else if (
+      confirmPasswordInput.dirty &&
+      confirmPasswordInput.value !== passwordInput.value
+    ) {
+      return <Text style={styles.error}>As senhas não são iguais</Text>;
+    } else {
+      return <Text style={styles.error}> </Text>;
+    }
+  };
+
   const handleErrorPassword = () => {
     if (!passwordInput.value && passwordInput.dirty) {
       return <Text style={styles.error}>Campo Obrigatório*</Text>;
@@ -79,7 +100,7 @@ const Cadastrar: React.FC = () => {
 
   const validForm = () => {
     let hasError = false;
-    if (!fullNameInput.value) {
+    if (!fullNameInput.value || fullNameInput.value.trim().length < 2) {
       setFullNameInput({ ...fullNameInput, dirty: true });
       hasError = true;
     }
@@ -93,6 +114,10 @@ const Cadastrar: React.FC = () => {
     }
     if (!passwordInput.value) {
       setPasswordInput({ ...passwordInput, dirty: true });
+      hasError = true;
+    }
+    if (!confirmPasswordInput.value || confirmPasswordInput.value !== passwordInput.value) {
+      setConfirmPasswordInput({ ...confirmPasswordInput, dirty: true });
       hasError = true;
     }
 
@@ -153,15 +178,21 @@ const Cadastrar: React.FC = () => {
         />
         {handleErrorEmail()}
         <TextInput
-          onChangeText={(text) =>
-            setPasswordInput({ value: text, dirty: true })
-          }
+          onChangeText={(text) => setPasswordInput({ value: text, dirty: true })}
           style={styles.input}
           placeholder="Senha"
           placeholderTextColor="#777"
           secureTextEntry
         />
         {handleErrorPassword()}
+        <TextInput
+          onChangeText={(text) => setConfirmPasswordInput({ value: text, dirty: true })}
+          style={styles.input}
+          placeholder="Insira a senha mais uma vez"
+          placeholderTextColor="#777"
+          secureTextEntry
+        />
+        {handleErrorPasswordMatch()}
 
         {/* Botão de Cadastrar */}
         <TouchableOpacity style={styles.registerButton} onPress={validForm}>

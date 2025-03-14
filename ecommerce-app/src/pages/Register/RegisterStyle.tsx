@@ -76,5 +76,5 @@ export default StyleSheet.create({
     marginBottom: "2%",
     color: "red",
     fontWeight: "bold",
-  },
+  }, 
 });

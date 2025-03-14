@@ -10,6 +10,9 @@ const Homepage: React.FC = () => {
   type HomePageScreenNavigationProp = StackNavigationProp<RootStackParamList, "HomeScreen">;
   const navigation = useNavigation<HomePageScreenNavigationProp>();
   const { addToCart } = useCart(); // Pega a função de adicionar ao carrinho
+  const [menuVisible, setMenuVisible] = useState(false);
+
+  const toggleMenu = () => setMenuVisible(!menuVisible);
 
   // Função para adicionar ao carrinho e redirecionar para a tela do carrinho
   const handleAddToCart = (product: { id: string; title: string; price: number; image: any }) => {
@@ -57,11 +60,20 @@ const Homepage: React.FC = () => {
         {/* Logo */}  
         <Image style={styles.Logo} source={require("../../../assets/img/click&buy.png")} /> 
 
-        {/* Logout */}
-        <TouchableOpacity onPress={() => navigation.navigate("Login")}>      
-          <Image style={styles.Logout} source={require("../../../assets/img/logout.png")} />
+        {/* Menu */}
+        <TouchableOpacity onPress={toggleMenu}>
+          <Image style={styles.MenuIcon} source={require("../../../assets/img/menu.png")} />
         </TouchableOpacity>
       </View>
+
+      {menuVisible && (
+        <View style={styles.MenuContainer}>
+            <Text style={styles.MenuText}>Chatbot IA</Text> 
+          <TouchableOpacity onPress={() => navigation.navigate("Login")} style={styles.MenuItem}>
+            <Text style={styles.MenuText}>Sair</Text>
+          </TouchableOpacity>
+        </View>
+      )}
 
       {/* Barra de busca */}
       <View style={styles.SearchContainer}>
