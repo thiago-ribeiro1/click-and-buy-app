@@ -104,7 +104,7 @@ const Cadastrar: React.FC = () => {
       setFullNameInput({ ...fullNameInput, dirty: true });
       hasError = true;
     }
-    if (!cpfRegex.test(cpfInput.value) && cpfInput.dirty) {
+    if (!cpfInput.value || !cpfRegex.test(cpfInput.value)) {
       setCpfInput({ ...cpfInput, dirty: true });
       hasError = true;
     }
