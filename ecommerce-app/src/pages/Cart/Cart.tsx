@@ -49,6 +49,7 @@ const Cart: React.FC = () => {
                 <View style={styles.itemDetails}>
                   <Text style={styles.productName}>{item.title}</Text>
                   <Text style={styles.productPrice}>R${item.price.toFixed(2)}</Text>
+                  <Text style={styles.productQuantity}>Quantidade: {item.quantity}</Text>
                 </View>
                 <TouchableOpacity onPress={() => removeFromCart(item.id)}>
                   <Image source={require("../../../assets/img/remover.png")} style={styles.removeIcon} />
