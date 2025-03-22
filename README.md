@@ -68,13 +68,15 @@ ECOMMERCE-APP/
 
 ## 🛠 Como Utilizar
 
-### 1️⃣ Pré-requisitos
+### Pré-requisitos
 
 - Node.js instalado (recomendável versão 23)
 - Fazer download do app "Expo Go" para exibição da interface
-- Expo CLI instalado:
-  
+
+### 1️⃣ Expo CLI instalado
+
 ```bash
+cd ecommerce-app
 npm install -g expo-cli
 ```
 
