@@ -4,15 +4,18 @@ import { useNavigation } from "@react-navigation/native";
 import { StackNavigationProp } from "@react-navigation/stack";
 import { RootStackParamList } from "../../NavigationTypes/navigationTypes";
 import styles from "./OrderPlacedStyle";
+import { useCart } from "../Cart/CartContext"; // Importando o contexto
 
 const OrderPlaced: React.FC = () => {
 
   // Define a navegação para esta tela
   type OrderPlacedScreenNavigationProp = StackNavigationProp<RootStackParamList, "OrderPlaced">;
   const navigation = useNavigation<OrderPlacedScreenNavigationProp>();
+  const { clearCart } = useCart();
 
   useEffect(() => {
     const timer = setTimeout(() => {
+      clearCart();
       navigation.replace("HomeScreen"); // Substitui a tela atual pela HomeScreen em 4 segundos
     }, 4000);
 
