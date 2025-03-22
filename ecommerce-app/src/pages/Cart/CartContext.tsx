@@ -56,13 +56,13 @@ export const CartProvider: React.FC<{ children: React.ReactNode }> = ({ children
     });
   };
 
-  // Limpa o carrinho 
   const clearCart = () => {
     setCartItems([]);
   };
   
+
   // Cálculo do total
-  const total = cartItems.reduce((acc, item) => acc + item.price, 0);
+  const total = cartItems.reduce((acc, item) => acc + item.price * item.quantity, 0);
 
   return (
     <CartContext.Provider value={{ cartItems, addToCart, removeFromCart, total, clearCart }}>
