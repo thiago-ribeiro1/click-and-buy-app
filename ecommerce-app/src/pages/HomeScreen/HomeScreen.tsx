@@ -16,7 +16,7 @@ const Homepage: React.FC = () => {
 
   // Função para adicionar ao carrinho e redirecionar para a tela do carrinho
   const handleAddToCart = (product: { id: string; title: string; price: number; image: any }) => {
-    addToCart(product);
+    addToCart({ ...product, quantity: 1 });
     navigation.navigate("Cart"); // Redireciona para a tela do carrinho após adicionar
   };
 
