@@ -6,6 +6,7 @@ interface CartItem {
   title: string;
   price: number;
   image: any;
+  quantity: number;
 }
 
 // Tipagem do Contexto
@@ -14,6 +15,7 @@ interface CartContextType {
   addToCart: (item: CartItem) => void;
   removeFromCart: (id: string) => void;
   total: number;
+  clearCart: () => void;
 }
 
 // Criando o contexto
@@ -25,19 +27,45 @@ export const CartProvider: React.FC<{ children: React.ReactNode }> = ({ children
 
   // Função para adicionar um item ao carrinho
   const addToCart = (item: CartItem) => {
-    setCartItems((prevItems) => [...prevItems, item]);
+    setCartItems((prevItems) => {
+      const existingItem = prevItems.find((cartItem) => cartItem.id === item.id);
+      if (existingItem) {
+        
+        return prevItems.map((cartItem) =>
+          cartItem.id === item.id ? { ...cartItem, quantity: cartItem.quantity + 1 } : cartItem
+        );
+      } else {
+        return [...prevItems, { ...item, quantity: 1 }];
+      }
+    });
   };
 
   // Função para remover um item do carrinho
   const removeFromCart = (id: string) => {
-    setCartItems((prevItems) => prevItems.filter((item) => item.id !== id));
+    setCartItems((prevItems) => {
+      const existingItem = prevItems.find((cartItem) => cartItem.id === id);
+      if (existingItem && existingItem.quantity > 1) {
+        
+        return prevItems.map((cartItem) =>
+          cartItem.id === id ? { ...cartItem, quantity: cartItem.quantity - 1 } : cartItem
+        );
+      } else {
+        
+        return prevItems.filter((cartItem) => cartItem.id !== id);
+      }
+    });
   };
 
+  // Limpa o carrinho 
+  const clearCart = () => {
+    setCartItems([]);
+  };
+  
   // Cálculo do total
   const total = cartItems.reduce((acc, item) => acc + item.price, 0);
 
   return (
-    <CartContext.Provider value={{ cartItems, addToCart, removeFromCart, total }}>
+    <CartContext.Provider value={{ cartItems, addToCart, removeFromCart, total, clearCart }}>
       {children}
     </CartContext.Provider>
   );
