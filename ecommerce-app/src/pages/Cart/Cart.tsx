@@ -42,7 +42,7 @@ const Cart: React.FC = () => {
           {/* Lista de Produtos no Carrinho */}
           <FlatList
             data={cartItems}
-            keyExtractor={(item) => item.id}
+            keyExtractor={(item) => `${item.id}-${item.quantity}`} // Gera uma chave única combinando id e quantidade
             renderItem={({ item }) => (
               <View style={styles.cartItem}>
                 <Image source={item.image} style={styles.productImage} />
