@@ -52,6 +52,11 @@ export default StyleSheet.create({
     fontWeight: "bold",
     color: "#333",
   },
+    productQuantity: {
+    fontSize: 14,
+    color: "#555",
+    fontWeight: "400",
+  },
   productPrice: {
     fontSize: 14,
     color: "#777",
