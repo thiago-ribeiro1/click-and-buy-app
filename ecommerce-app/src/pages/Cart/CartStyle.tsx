@@ -1,6 +1,5 @@
 import { StyleSheet } from "react-native";
 
-
 export default StyleSheet.create({
   container: {
     flex: 1,
@@ -52,14 +51,14 @@ export default StyleSheet.create({
     fontWeight: "bold",
     color: "#333",
   },
-    productQuantity: {
-    fontSize: 14,
-    color: "#555",
-    fontWeight: "400",
-  },
   productPrice: {
     fontSize: 14,
     color: "#777",
+  },
+  productQuantity: {
+    fontSize: 14,
+    color: "#555",
+    fontWeight: "400",
   },
   removeIcon: {
     width: 24,
@@ -102,7 +101,6 @@ export default StyleSheet.create({
     fontWeight: "bold",
     color: "#000",
   },
-
   finalizarBtn: {
     backgroundColor: "#0B8FAC",
     borderRadius: 100,

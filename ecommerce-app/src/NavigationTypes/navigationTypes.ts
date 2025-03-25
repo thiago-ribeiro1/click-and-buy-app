@@ -5,4 +5,11 @@ export type RootStackParamList = {
   HomeScreen: undefined;
   Cart: undefined;
   OrderPlaced: undefined;
+  Profile: undefined;
+  MyOrders: undefined;
+  ProductDetails: {
+    title: string;
+    price: number;
+    image: any;
+  };    
 };

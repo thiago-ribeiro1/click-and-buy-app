@@ -5,11 +5,14 @@ import { StackNavigationProp } from "@react-navigation/stack";
 import { RootStackParamList } from "../../NavigationTypes/navigationTypes";
 import styles from "./HomeScreenStyle";
 import { useCart } from "../Cart/CartContext"; // Importando o contexto
+import { useAuth } from "../../services/AuthContext"; // Importando o contexto autenticação
+
 
 const Homepage: React.FC = () => {
   type HomePageScreenNavigationProp = StackNavigationProp<RootStackParamList, "HomeScreen">;
   const navigation = useNavigation<HomePageScreenNavigationProp>();
   const { addToCart } = useCart(); // Pega a função de adicionar ao carrinho
+  const { logout } = useAuth(); // Função de logout
   const [menuVisible, setMenuVisible] = useState(false);
 
   const toggleMenu = () => setMenuVisible(!menuVisible);
@@ -51,11 +54,13 @@ const Homepage: React.FC = () => {
 
   return (
     <ScrollView style={styles.Homepage} contentContainerStyle={{ paddingBottom: 20 }} showsVerticalScrollIndicator={false}>
-      {/* Header com Avatar Logo e Logout */}
+      {/* Header com Avatar Logo e Menu */}
       <View style={styles.Header}>
 
         {/* Avatar */}
+        <TouchableOpacity onPress={() => navigation.navigate("Profile")}>
         <Image style={styles.Avatar} source={require("../../../assets/img/avatar.png")} />
+        </TouchableOpacity>
         
         {/* Logo */}  
         <Image style={styles.Logo} source={require("../../../assets/img/click&buy.png")} /> 
@@ -68,10 +73,16 @@ const Homepage: React.FC = () => {
 
       {menuVisible && (
         <View style={styles.MenuContainer}>
-            <Text style={styles.MenuText}>Chatbot IA</Text> 
-          <TouchableOpacity onPress={() => navigation.navigate("Login")} style={styles.MenuItem}>
+          <TouchableOpacity style={styles.MenuItem}>
+            <Text style={styles.MenuText}>Chatbot IA</Text>
+          </TouchableOpacity>
+          <TouchableOpacity onPress={() => navigation.navigate("MyOrders")} style={styles.MenuItem}>
+            <Text style={styles.MenuText}>Pedidos</Text>
+          </TouchableOpacity>
+          <TouchableOpacity onPress={logout} style={styles.MenuItem}> 
             <Text style={styles.MenuText}>Sair</Text>
           </TouchableOpacity>
+
         </View>
       )}
 

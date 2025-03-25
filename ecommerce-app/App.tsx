@@ -9,20 +9,91 @@ import HomeScreen from "./src/pages/HomeScreen/HomeScreen";
 import Cart from "./src/pages/Cart/Cart";
 import { CartProvider } from "./src/pages/Cart/CartContext";
 import OrderPlaced from "./src/pages/OrderPlaced/OrderPlaced";
+import Profile from "./src/pages/Profile/Profile";
+import MyOrders from "./src/pages/MyOrders/MyOrders";
+import ProductDetails from "./src/pages/ProductDetails/ProductDetails";
+import Toast from "react-native-toast-message";
+
+// Importa contexto de autenticação
+import { AuthProvider, useAuth } from "./src/services/AuthContext";
 
 // Criação do Stack Navigator tipado com RootStackParamList
 const Stack = createStackNavigator<RootStackParamList>();
+
+// Função separada para renderizar as rotas com base na autenticação
+function Routes() {
+  const { isAuthenticated, loading } = useAuth();
+
+  if (loading) {
+    // Enquanto verifica autenticação, mostra Splash
+    return <SplashScreen />;
+  }
+
+  return (
+    // Tela de Login como a primeira tela após o SplashScreen
+    //  Se estiver autenticado, exibe a HomeScreen, se não, exibe a tela de Login ou Cadastro 
+    <Stack.Navigator initialRouteName={isAuthenticated ? "HomeScreen" : "Login"}> 
+      {!isAuthenticated ? ( 
+        <>
+          <Stack.Screen // não autenticado exibe apenas a tela de Login e Cadastro
+            name="Login"
+            component={Login}
+            options={{ headerShown: false }}
+          />
+          <Stack.Screen
+            name="Register"
+            component={Register}
+            options={{ headerShown: false, title: "Cadastro" }}
+          />
+        </>
+      ) : (
+        <>
+          <Stack.Screen // Se autenticado, exibe a HomeScreen, e demais telas abaixo
+            name="HomeScreen"
+            component={HomeScreen}
+            options={{ headerShown: false }}
+          />
+          <Stack.Screen
+            name="Cart"
+            component={Cart}
+            options={{ headerShown: false, title: "Carrinho" }}
+          />
+          <Stack.Screen
+            name="OrderPlaced"
+            component={OrderPlaced}
+            options={{ headerShown: false }}
+          />
+          <Stack.Screen
+            name="Profile"
+            component={Profile}
+            options={{ headerShown: false }}
+          />
+          <Stack.Screen
+            name="MyOrders"
+            component={MyOrders}
+            options={{ headerShown: false }}
+          />
+          <Stack.Screen
+            name="ProductDetails"
+            component={ProductDetails}
+            options={{ headerShown: false }}
+          />
+        </>
+      )}
+    </Stack.Navigator>
+  );
+}
 
 function App() {
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
-    // Simula o tempo de exibição da Splash Screen (3 segundos)
+    // Simula o tempo de exibição da Splash Screen (3,5 segundos)
     const timer = setTimeout(() => {
       setIsLoading(false);
-    }, 3000);
+    }, 3500);
 
-    return () => clearTimeout(timer); // Limpa o timer para evitar problemas de memória
+    return () => clearTimeout(timer); // Limpa o timer quando o componente é desmontado
   }, []);
 
   // Se ainda estiver carregando, exibe a Splash Screen
@@ -31,38 +102,14 @@ function App() {
   }
 
   return (
-    <CartProvider>
-    <NavigationContainer>
-      {/* Tela de Login como a primeira tela após o SplashScreen */}
-      <Stack.Navigator initialRouteName="Login">
-        <Stack.Screen
-          name="Login"
-          component={Login}
-          options={{ headerShown: false }}
-        />
-        <Stack.Screen
-          name="Register"
-          component={Register}
-          options={{ headerShown: false, title: "Cadastro" }}
-        />
-        <Stack.Screen
-          name="HomeScreen"
-          component={HomeScreen}
-          options={{ headerShown: false }}
-        />
-        <Stack.Screen
-          name="Cart"
-          component={Cart}
-          options={{ headerShown: false, title: "Carrinho" }}
-        />
-        <Stack.Screen
-          name="OrderPlaced"
-          component={OrderPlaced}
-          options={{ headerShown: false }}
-        />
-      </Stack.Navigator>
-    </NavigationContainer>
-    </CartProvider>
+    <AuthProvider>
+      <CartProvider>
+        <NavigationContainer>
+          <Routes />
+          <Toast />
+        </NavigationContainer>
+      </CartProvider>
+    </AuthProvider>
   );
 }
 

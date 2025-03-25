@@ -5,93 +5,82 @@ import { StackNavigationProp } from "@react-navigation/stack";
 import { RootStackParamList } from "../../NavigationTypes/navigationTypes";
 import Toast from "react-native-toast-message";
 import styles from "./LoginStyle";
+import { login } from "../../services/authService";
+import { useAuth } from "@/src/services/AuthContext";
 
-// Define os tipos de navegação para esta tela
+// Tipagem de navegação
 type LoginScreenNavigationProp = StackNavigationProp<
   RootStackParamList,
   "Login"
 >;
 
+// Componente de Login
 const Login: React.FC = () => {
-  const navigation = useNavigation<LoginScreenNavigationProp>(); // Hook para navegação
-  const [emailInput, setEmailInput] = useState({ value: "", dirty: false });
-  const [passwordInput, setPasswordInput] = useState({
-    value: "",
-    dirty: false,
-  });
-  
-  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  const navigation = useNavigation<LoginScreenNavigationProp>();
+
+  const [usernameInput, setUsernameInput] = useState({ value: "", dirty: false }); 
+  const [passwordInput, setPasswordInput] = useState({ value: "", dirty: false });
+  const { checkAuth } = useAuth(); // Importa função de autenticação
 
   const showMessage = (type: string, title: string, message: string) => {
-    Toast.show({
-      type: type,
-      text1: title,
-      text2: message,
-    });
+    Toast.show({ type, text1: title, text2: message });
   };
 
-  const handleErrorEmail = () => {
-    if (!emailInput.value && emailInput.dirty) {
-      return <Text style={styles.error}>Campo Obrigatório*</Text>;
-    } else if (!emailRegex.test(emailInput.value) && emailInput.dirty) {
-      return <Text style={styles.error}>Email inválido*</Text>;
-    } else {
-      return <Text style={styles.error}> </Text>;
+  const handleLogin = async () => {
+    if (!usernameInput.value || !passwordInput.value) {
+      Toast.show({
+        type: "error",
+        text1: "Erro",
+        text2: "Preencha todos os campos obrigatórios",
+      });
+      return;
+    }
+  
+    try {
+      await login({
+        username: usernameInput.value,
+        password: passwordInput.value,
+      });
+  
+      Toast.show({
+        type: "success",
+        text1: "Login efetuado com sucesso!",
+      });
+
+      checkAuth();
+  
+    } catch (error: any) {
+      console.log("Erro ao logar:", error);
+      Toast.show({
+        type: "error",
+        text1: "Erro ao fazer login",
+        text2: "Credenciais inválidas",
+      });
     }
   };
-
-  const handleErrorPassword = () => {
-    if (!passwordInput.value && passwordInput.dirty) {
-      return <Text style={styles.error}>Campo Obrigatório*</Text>;
-    } else {
-      return <Text style={styles.error}> </Text>;
-    }
-  };
-
-  const validForm = () => {
-    let hasError = false;
-    if (!emailRegex.test(emailInput.value) || !emailInput.value) {
-      setEmailInput({ ...emailInput, dirty: true });
-      hasError = true;
-    }
-    if (!passwordInput.value) {
-      setPasswordInput({ ...passwordInput, dirty: true });
-      hasError = true;
-    }
-
-    if (!hasError) {
-      showMessage(
-        "success",
-        "Usuário logado",
-        "Credenciais válidas com sucesso"
-      );
-      navigation.navigate("HomeScreen");
-    } else {
-      showMessage("error", "Erro", "Credenciais inválidas");
-    }
-  };
-
+  
   return (
     <View style={styles.container}>
       <Text style={styles.title}>Entre na sua conta</Text>
 
       <TextInput
-        onChangeText={(text) => setEmailInput({ value: text, dirty: true })}
+        onChangeText={(text) => setUsernameInput({ value: text, dirty: true })}
         style={styles.input}
-        placeholder="Email"
+        placeholder="Username"
         placeholderTextColor="#777"
+        value={usernameInput.value}
       />
-      {handleErrorEmail()}
+
       <TextInput
         onChangeText={(text) => setPasswordInput({ value: text, dirty: true })}
         style={styles.input}
         placeholder="Senha"
         placeholderTextColor="#777"
         secureTextEntry
-      />
-      {handleErrorPassword()}
+        value={passwordInput.value}
+      />     
 
-      <TouchableOpacity style={styles.button} onPress={validForm}>
+      <TouchableOpacity style={styles.button} onPress={handleLogin}>
         <Text style={styles.buttonText}>Entrar</Text>
       </TouchableOpacity>
 

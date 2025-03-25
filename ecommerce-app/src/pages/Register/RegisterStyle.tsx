@@ -12,7 +12,7 @@ export default StyleSheet.create({
     position: "absolute",
     top: 50,
     left: 20,
-    zIndex: 10, // Garante que o botão fique acima de tudo
+    zIndex: 10, 
   },
   backIcon: {
     width: 37,

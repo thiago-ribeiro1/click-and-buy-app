@@ -5,8 +5,9 @@ import { useNavigation } from "@react-navigation/native";
 import { StackNavigationProp } from "@react-navigation/stack";
 import { RootStackParamList } from "../../NavigationTypes/navigationTypes";
 import Toast from "react-native-toast-message";
+import { signup } from "../../services/authService"; // integração com backend
 
-const Cadastrar: React.FC = () => {
+const SignUp: React.FC = () => {
   // Define os tipos para navegação nesta tela
   type RegisterScreenNavigationProp = StackNavigationProp<
     RootStackParamList,
@@ -14,28 +15,16 @@ const Cadastrar: React.FC = () => {
   >;
 
   const navigation = useNavigation<RegisterScreenNavigationProp>();
-  const [fullNameInput, setFullNameInput] = useState({
-    value: "",
-    dirty: false,
-  });
-  const [cpfInput, setCpfInput] = useState({
-    value: "",
-    dirty: false,
-  });
-  const [emailInput, setEmailInput] = useState({ value: "", dirty: false });
-  const [passwordInput, setPasswordInput] = useState({
-    value: "",
-    dirty: false,
-  });
-  const [confirmPasswordInput, setConfirmPasswordInput] = useState({
-    value: "",
-    dirty: false,
-  });
+  const [usernameInput, setUsernameInput] = useState("");
+  const [fullNameInput, setFullNameInput] = useState("");
+  const [cpfInput, setCpfInput] = useState("");
+  const [emailInput, setEmailInput] = useState("");
+  const [passwordInput, setPasswordInput] = useState("");
+  const [confirmPasswordInput, setConfirmPasswordInput] = useState("");
 
   // Regex
   const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
   const cpfRegex = /^\d{3}\.\d{3}\.\d{3}-\d{2}$/;
-
 
   const showMessage = (type: string, title: string, message: string) => {
     Toast.show({
@@ -45,93 +34,70 @@ const Cadastrar: React.FC = () => {
     });
   };
 
-  const handleErrorFullName = () => {
-    const name = fullNameInput.value.trim();
-  
-    // verifica se tem pelo menos dois caracteres
-    if (fullNameInput.dirty && name.length < 2) {
-      return <Text style={styles.error}>{name ? "Digite pelo menos dois caracteres*" : "Campo Obrigatório*"}</Text>;
-    }
-  
-    return <Text style={styles.error}> </Text>;
-  };
-  
-
-  const handleErrorCpf = () => {
-    if (!cpfInput.value && cpfInput.dirty) {
-      return <Text style={styles.error}>Campo Obrigatório*</Text>;
-    } else if (!cpfRegex.test(cpfInput.value) && cpfInput.dirty) {
-      return <Text style={styles.error}>CPF inválido*</Text>;
-    } else {
-      return <Text style={styles.error}> </Text>;
-    }
-  };
-
-  const handleErrorEmail = () => {
-    if (!emailInput.value && emailInput.dirty) {
-      return <Text style={styles.error}>Campo Obrigatório*</Text>;
-    } else if (!emailRegex.test(emailInput.value) && emailInput.dirty) {
-      return <Text style={styles.error}>Email inválido*</Text>;
-    } else {
-      return <Text style={styles.error}> </Text>;
-    }
-  };
-
-  const handleErrorPasswordMatch = () => {
-    if (!confirmPasswordInput.value && confirmPasswordInput.dirty) {
-      return <Text style={styles.error}>Campo Obrigatório*</Text>;
-    } else if (
-      confirmPasswordInput.dirty &&
-      confirmPasswordInput.value !== passwordInput.value
+  const validForm = async () => {
+    // Verifica se algum campo obrigatório está vazio
+    if (
+      !usernameInput ||
+      !fullNameInput ||
+      !cpfInput ||
+      !emailInput ||
+      !passwordInput ||
+      !confirmPasswordInput
     ) {
-      return <Text style={styles.error}>As senhas não são iguais</Text>;
-    } else {
-      return <Text style={styles.error}> </Text>;
+      Toast.show({
+        type: "error",
+        text1: "Erro",
+        text2: "Preencha todos os campos obrigatórios",
+      });
+      return;
     }
-  };
-
-  const handleErrorPassword = () => {
-    if (!passwordInput.value && passwordInput.dirty) {
-      return <Text style={styles.error}>Campo Obrigatório*</Text>;
-    } else {
-      return <Text style={styles.error}> </Text>;
+  
+    // Validações detalhadas só após todos os campos estarem preenchidos
+    if (fullNameInput.trim().length < 2) {
+      Toast.show({ type: "error", text1: "Erro de validação", text2: "Insira no mínimo 2 caracteres no nome completo" });
+      return;
     }
-  };
-
-  const validForm = () => {
-    let hasError = false;
-    if (!fullNameInput.value || fullNameInput.value.trim().length < 2) {
-      setFullNameInput({ ...fullNameInput, dirty: true });
-      hasError = true;
+  
+    if (!cpfRegex.test(cpfInput)) {
+      Toast.show({ type: "error", text1: "Erro de validação", text2: "CPF inválido" });
+      return;
     }
-    if (!cpfInput.value || !cpfRegex.test(cpfInput.value)) {
-      setCpfInput({ ...cpfInput, dirty: true });
-      hasError = true;
+  
+    if (!emailRegex.test(emailInput)) {
+      Toast.show({ type: "error", text1: "Erro de validação", text2: "Email inválido" });
+      return;
     }
-    if (!emailRegex.test(emailInput.value) || !emailInput.value) {
-      setEmailInput({ ...emailInput, dirty: true });
-      hasError = true;
+  
+    if (confirmPasswordInput !== passwordInput) {
+      Toast.show({ type: "error", text1: "Erro de validação", text2: "As senhas não são iguais" });
+      return;
     }
-    if (!passwordInput.value) {
-      setPasswordInput({ ...passwordInput, dirty: true });
-      hasError = true;
-    }
-    if (!confirmPasswordInput.value || confirmPasswordInput.value !== passwordInput.value) {
-      setConfirmPasswordInput({ ...confirmPasswordInput, dirty: true });
-      hasError = true;
-    }
-
-    if (!hasError) {
-      showMessage(
-        "success",
-        "Usuário cadastrado !!!",
-        "Credenciais cadastradas com sucesso"
-      );
+  
+    try {
+      await signup({
+        username: usernameInput,
+        name: fullNameInput,
+        cpf: cpfInput,
+        email: emailInput,
+        password: passwordInput,
+      });
+  
+      Toast.show({
+        type: "success",
+        text1: "Cadastro realizado com sucesso!",
+        text2: "Entre na sua conta",
+      });
+  
       navigation.navigate("Login");
-    } else {
-      showMessage("error", "Erro", "Credenciais inválidas");
+    } catch (error: any) {
+      console.log("Erro ao cadastrar:", error?.response?.data || error);
+      Toast.show({
+        type: "error",
+        text1: "Erro ao cadastrar",
+        text2: "Tente novamente",
+      });
     }
-  };
+  };    
 
   return (
     <View style={styles.container}>
@@ -152,47 +118,50 @@ const Cadastrar: React.FC = () => {
       <View style={styles.formContainer}>
         {/* Campos de entrada */}
         <TextInput
-          onChangeText={(text) =>
-            setFullNameInput({ value: text, dirty: true })
-          }
+          onChangeText={setUsernameInput}
+          value={usernameInput}
+          style={styles.input}
+          placeholder="Username"
+          placeholderTextColor="#777"
+        />
+        <TextInput
+          onChangeText={setFullNameInput}
+          value={fullNameInput}
           style={styles.input}
           placeholder="Nome Completo"
           placeholderTextColor="#777"
         />
-        {handleErrorFullName()}
         <TextInput
-          onChangeText={(text) =>
-            setCpfInput({ value: text, dirty: true })
-          }
+          onChangeText={setCpfInput}
+          value={cpfInput}
           style={styles.input}
           placeholder="CPF"
           placeholderTextColor="#777"
         />
-        {handleErrorCpf()}
         <TextInput
-          onChangeText={(text) => setEmailInput({ value: text, dirty: true })}
+          onChangeText={setEmailInput}
+          value={emailInput}
           style={styles.input}
           placeholder="Email"
           placeholderTextColor="#777"
           keyboardType="email-address"
         />
-        {handleErrorEmail()}
         <TextInput
-          onChangeText={(text) => setPasswordInput({ value: text, dirty: true })}
+          onChangeText={setPasswordInput}
+          value={passwordInput}
           style={styles.input}
           placeholder="Senha"
           placeholderTextColor="#777"
           secureTextEntry
         />
-        {handleErrorPassword()}
         <TextInput
-          onChangeText={(text) => setConfirmPasswordInput({ value: text, dirty: true })}
+          onChangeText={setConfirmPasswordInput}
+          value={confirmPasswordInput}
           style={styles.input}
           placeholder="Insira a senha mais uma vez"
           placeholderTextColor="#777"
           secureTextEntry
         />
-        {handleErrorPasswordMatch()}
 
         {/* Botão de Cadastrar */}
         <TouchableOpacity style={styles.registerButton} onPress={validForm}>
@@ -216,4 +185,4 @@ const Cadastrar: React.FC = () => {
   );
 };
 
-export default Cadastrar;
+export default SignUp;

@@ -1,10 +1,10 @@
 import React, { useEffect } from "react";
-import { Image, Text, View } from "react-native";
+import { Image, Text, Touchable, TouchableOpacity, View } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 import { StackNavigationProp } from "@react-navigation/stack";
 import { RootStackParamList } from "../../NavigationTypes/navigationTypes";
 import styles from "./OrderPlacedStyle";
-import { useCart } from "../Cart/CartContext"; // Importando o contexto
+import { useCart } from "../Cart/CartContext";
 
 const OrderPlaced: React.FC = () => {
 
@@ -15,7 +15,7 @@ const OrderPlaced: React.FC = () => {
 
   useEffect(() => {
     const timer = setTimeout(() => {
-      clearCart();
+    clearCart();
       navigation.replace("HomeScreen"); // Substitui a tela atual pela HomeScreen em 4 segundos
     }, 4000);
 
