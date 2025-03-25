@@ -1,4 +1,6 @@
-# 🛒 Click&Buy (⚙️ Status: Em desenvolvimento)
+# 🛒 Click&Buy 
+
+### (⚙️ Status: Em desenvolvimento)
 
 Aplicação mobile desenvolvida em **React Native** que permite aos usuários se cadastrarem, efetuarem login, visualizar produtos, adicionar ao carrinho, remover produtos e finalizar pedidos.
 
