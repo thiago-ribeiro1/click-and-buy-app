@@ -2,7 +2,7 @@
 
 ### (⚙️ Status: Em desenvolvimento)
 
-Aplicação mobile desenvolvida em **React Native** que permite aos usuários se cadastrarem, efetuarem login, visualizar produtos, adicionar ao carrinho, remover produtos e finalizar pedidos.
+Aplicação mobile desenvolvida em **React Native** e backend em **Node.js**, que permite aos usuários se cadastrarem, efetuarem login, visualizar produtos, adicionar ao carrinho, remover produtos e finalizar pedidos.
 
 <img src="https://img.shields.io/badge/React_Native-20232A?style=for-the-badge&logo=react&logoColor=61DAFB" alt="React Native" />
 
