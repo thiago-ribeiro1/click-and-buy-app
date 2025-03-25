@@ -1,4 +1,4 @@
-# 🛒 Click&Buy
+# 🛒 Click&Buy (⚙️ Status: Em desenvolvimento)
 
 Aplicação mobile desenvolvida em **React Native** que permite aos usuários se cadastrarem, efetuarem login, visualizar produtos, adicionar ao carrinho, remover produtos e finalizar pedidos.
 
@@ -50,12 +50,19 @@ ECOMMERCE-APP/
 │── src/                  # Código principal do app
 │   ├── NavigationTypes/  # Tipos de navegação
 │   ├── pages/            # Páginas do aplicativo
-│   │   ├── Cart/         # Tela do carrinho
-│   │   ├── HomeScreen/   # Tela principal
-│   │   ├── Login/        # Tela de login
-│   │   ├── OrderPlaced/  # Tela de pedido concluído
-│   │   ├── Register/     # Tela de registro de usuário
-│   │   └── SplashScreen/ # Tela de carregamento inicial
+│   │   ├── Cart/             # Tela do carrinho
+│   │   ├── HomeScreen/       # Tela principal
+│   │   ├── Login/            # Tela de login
+│   │   ├── MyOrders/         # Tela com histórico de pedidos do usuário
+│   │   ├── OrderPlaced/      # Tela de confirmação de pedido realizado
+│   │   ├── ProductDetails/   # Tela com detalhes de um produto selecionado
+│   │   ├── Profile/          # Tela de perfil do usuário
+│   │   ├── Register/         # Tela de cadastro de novo usuário
+│   │   └── SplashScreen/     # Tela inicial de carregamento
+│   └── services/             # Serviços e contexto de autenticação
+│       ├── AuthContext.tsx   # Contexto global de autenticação
+│       ├── authService.ts    # Funções relacionadas à autenticação (login, registro)
+│       └── httpService.ts    # Configuração do cliente HTTP (axios, fetch, etc.)
 │── .gitignore            # Arquivo para ignorar arquivos no Git
 │── app.json              # Configurações do aplicativo Expo
 │── App.tsx               # Componente raiz do aplicativo
@@ -106,6 +113,15 @@ Tela para login e criação de novos usuários.
 
 ### 🔹 HomeScreen
 Exibição dos produtos disponíveis.
+
+### 🔹 Profile (⚙️ Status: Em desenvolvimento)
+Tela com informações do usuário logado.
+
+### 🔹 Detalhes Produto (⚙️ Status: Em desenvolvimento)
+Exibe informações de um produto específico.
+
+### 🔹 Pedidos (⚙️ Status: Em desenvolvimento)
+Pedidos de um usuário específico.
 
 ### 🔹 Carrinho
 Lista dos produtos adicionados ao carrinho, com opções para remover itens e finalizar a compra.
