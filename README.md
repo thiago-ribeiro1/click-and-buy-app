@@ -23,6 +23,36 @@ Aplicação mobile desenvolvida em **React Native** e backend em **Node.js**, qu
 - Atualização dinâmica do valor total no carrinho
 - Finalização do pedido
 
+## 🛠 Como Utilizar
+
+### Pré-requisitos
+
+- Node.js instalado (recomendável versão 23)
+- Fazer download do app "Expo Go" para exibição da interface
+
+### 1️⃣ Expo CLI instalado
+
+```bash
+cd ecommerce-app
+npm install -g expo-cli
+```
+
+### 2️⃣ Instalar Dependências
+
+```bash
+npm install
+```
+
+### 3️⃣ Executar o App
+
+Para iniciar o aplicativo, utilize:
+
+```bash
+npx expo start
+```
+
+Escaneie o QR Code e espere carregar a aplicação
+
 ## 📦 Principais Pacotes Utilizados
 
 | Pacote                 | Descrição |
@@ -74,36 +104,6 @@ ECOMMERCE-APP/
 │── tsconfig.json         # Configuração do TypeScript
 
 ```
-
-## 🛠 Como Utilizar
-
-### Pré-requisitos
-
-- Node.js instalado (recomendável versão 23)
-- Fazer download do app "Expo Go" para exibição da interface
-
-### 1️⃣ Expo CLI instalado
-
-```bash
-cd ecommerce-app
-npm install -g expo-cli
-```
-
-### 2️⃣ Instalar Dependências
-
-```bash
-npm install
-```
-
-### 3️⃣ Executar o App
-
-Para iniciar o aplicativo, utilize:
-
-```bash
-npx expo start
-```
-
-Escaneie o QR Code e espere carregar a aplicação
 
 ## 📱 Telas do Aplicativo
 
