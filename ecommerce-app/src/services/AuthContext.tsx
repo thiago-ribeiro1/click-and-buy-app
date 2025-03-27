@@ -41,6 +41,8 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
     try {
       const token = await AsyncStorage.getItem("authToken");
 
+      console.log("Token atual do usuário:", token);
+      
       if (token) {
         const user = await getCurrentUser(); // obtém o usuário da API com o token
         setCurrentUser(user);
