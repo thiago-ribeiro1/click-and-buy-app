@@ -44,7 +44,7 @@ const Login: React.FC = () => {
   
       Toast.show({
         type: "success",
-        text1: "Login efetuado com sucesso!",
+        text1: "Usuário Autenticado",
       });
 
       checkAuth();
