@@ -16,6 +16,8 @@ import Toast from "react-native-toast-message";
 
 // Importa contexto de autenticação
 import { AuthProvider, useAuth } from "./src/services/AuthContext";
+import Chat from "./src/pages/Chat/Chat";
+import ChatName from "./src/pages/Chat/ChatName";
 
 // Criação do Stack Navigator tipado com RootStackParamList
 const Stack = createStackNavigator<RootStackParamList>();
@@ -78,6 +80,16 @@ function Routes() {
             component={ProductDetails}
             options={{ headerShown: false }}
           />
+          <Stack.Screen
+            name="Chat"
+            component={Chat}
+            options={{ headerShown: false }}
+          />
+          <Stack.Screen
+            name="ChatName"
+            component={ChatName}
+            options={{ headerShown: false }}
+            />
         </>
       )}
     </Stack.Navigator>

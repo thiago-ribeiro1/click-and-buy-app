@@ -23,6 +23,7 @@
     "async-storage": "^0.1.0",
     "asyncstorage": "^1.5.0",
     "axios": "^1.8.4",
+    "colors": "^1.4.0",
     "expo": "52.0.38",
     "expo-blur": "~14.0.3",
     "expo-constants": "17.0.8",

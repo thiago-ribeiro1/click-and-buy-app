@@ -73,11 +73,11 @@ const Homepage: React.FC = () => {
 
       {menuVisible && (
         <View style={styles.MenuContainer}>
-          <TouchableOpacity style={styles.MenuItem}>
-            <Text style={styles.MenuText}>Chatbot IA</Text>
+          <TouchableOpacity onPress={() => navigation.navigate("ChatName")} style={styles.MenuItem}>
+            <Text style={styles.MenuText}>Conversar com a IA</Text>
           </TouchableOpacity>
           <TouchableOpacity onPress={() => navigation.navigate("MyOrders")} style={styles.MenuItem}>
-            <Text style={styles.MenuText}>Pedidos</Text>
+            <Text style={styles.MenuText}>Meus Pedidos</Text>
           </TouchableOpacity>
           <TouchableOpacity onPress={logout} style={styles.MenuItem}> 
             <Text style={styles.MenuText}>Sair</Text>
