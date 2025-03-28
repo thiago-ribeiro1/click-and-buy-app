@@ -83,6 +83,7 @@ ECOMMERCE-APP/
 │   ├── NavigationTypes/  # Tipos de navegação
 │   ├── pages/            # Páginas do aplicativo
 │   │   ├── Cart/             # Tela do carrinho
+│   │   ├── Chat/             # Chat
 │   │   ├── HomeScreen/       # Tela principal
 │   │   ├── Login/            # Tela de login
 │   │   ├── MyOrders/         # Tela com histórico de pedidos do usuário
