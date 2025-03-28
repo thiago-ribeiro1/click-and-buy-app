@@ -35,7 +35,6 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
   const [loading, setLoading] = useState(true);
   const [authenticated, setAuthenticated] = useState(false);
   const [currentUser, setCurrentUser] = useState<User | null>(null);
-
   
   // Função para verificar autenticação
   const checkAuth = async () => {
@@ -66,7 +65,6 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
     }
   };
   
-
   // Função para deslogar
   const logout = async () => {
     await AsyncStorage.removeItem("authToken");
