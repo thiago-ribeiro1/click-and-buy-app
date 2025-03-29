@@ -2,7 +2,7 @@ import axios from 'axios';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const api = axios.create({
-  baseURL: 'http://IP_LOCAL:3000/api', // coloque o IP local da sua máquina 
+  baseURL: 'http://IP-LOCAL:3000/api',  // coloque o IP local da sua máquina 
 });
 
 // Interceptor para adicionar token
