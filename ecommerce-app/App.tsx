@@ -100,10 +100,10 @@ function App() {
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
-    // Simula o tempo de exibição da Splash Screen (3,5 segundos)
+    // Simula o tempo de exibição da Splash Screen (4,5 segundos)
     const timer = setTimeout(() => {
       setIsLoading(false);
-    }, 3500);
+    }, 4500);
 
     return () => clearTimeout(timer); // Limpa o timer quando o componente é desmontado
   }, []);
