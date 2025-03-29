@@ -5,6 +5,7 @@ import { useNavigation } from "@react-navigation/native";
 import { StackNavigationProp } from "@react-navigation/stack";
 import { RootStackParamList } from "../../NavigationTypes/navigationTypes";
 import Toast from "react-native-toast-message";
+import { TextInputMask } from "react-native-masked-text";
 import { signup } from "../../services/authService"; // integração com backend
 
 const SignUp: React.FC = () => {
@@ -51,28 +52,44 @@ const SignUp: React.FC = () => {
       });
       return;
     }
-  
+
     // Validações detalhadas só após todos os campos estarem preenchidos
     if (fullNameInput.trim().length < 2) {
-      Toast.show({ type: "error", text1: "Erro de validação", text2: "Insira no mínimo 2 caracteres no nome completo" });
+      Toast.show({
+        type: "error",
+        text1: "Erro de validação",
+        text2: "Insira no mínimo 2 caracteres no nome completo",
+      });
       return;
     }
-  
+
     if (!cpfRegex.test(cpfInput)) {
-      Toast.show({ type: "error", text1: "Erro de validação", text2: "CPF inválido" });
+      Toast.show({
+        type: "error",
+        text1: "Erro de validação",
+        text2: "CPF inválido",
+      });
       return;
     }
-  
+
     if (!emailRegex.test(emailInput)) {
-      Toast.show({ type: "error", text1: "Erro de validação", text2: "Email inválido" });
+      Toast.show({
+        type: "error",
+        text1: "Erro de validação",
+        text2: "Email inválido",
+      });
       return;
     }
-  
+
     if (confirmPasswordInput !== passwordInput) {
-      Toast.show({ type: "error", text1: "Erro de validação", text2: "As senhas não são iguais" });
+      Toast.show({
+        type: "error",
+        text1: "Erro de validação",
+        text2: "As senhas não são iguais",
+      });
       return;
     }
-  
+
     try {
       await signup({
         username: usernameInput,
@@ -81,13 +98,13 @@ const SignUp: React.FC = () => {
         email: emailInput,
         password: passwordInput,
       });
-  
+
       Toast.show({
         type: "success",
         text1: "Cadastro realizado com sucesso!",
         text2: "Entre na sua conta",
       });
-  
+
       navigation.navigate("Login");
     } catch (error: any) {
       console.log("Erro ao cadastrar:", error?.response?.data || error);
@@ -97,7 +114,7 @@ const SignUp: React.FC = () => {
         text2: "Tente novamente",
       });
     }
-  };    
+  };
 
   return (
     <View style={styles.container}>
@@ -131,12 +148,14 @@ const SignUp: React.FC = () => {
           placeholder="Nome Completo"
           placeholderTextColor="#777"
         />
-        <TextInput
-          onChangeText={setCpfInput}
+        <TextInputMask
+          type={"cpf"}
           value={cpfInput}
+          onChangeText={setCpfInput}
           style={styles.input}
           placeholder="CPF"
           placeholderTextColor="#777"
+          keyboardType="numeric"
         />
         <TextInput
           onChangeText={setEmailInput}
@@ -165,9 +184,7 @@ const SignUp: React.FC = () => {
 
         {/* Botão de Cadastrar */}
         <TouchableOpacity style={styles.registerButton} onPress={validForm}>
-          <Text style={styles.registerButtonText}>
-            Cadastrar
-          </Text>
+          <Text style={styles.registerButtonText}>Cadastrar</Text>
         </TouchableOpacity>
       </View>
 
