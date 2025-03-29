@@ -18,8 +18,8 @@ export interface LoginData {
 
 // obter o usuário atual
 export const getCurrentUser = async () => {
-  const response = await api.get("/users"); 
-  currentUser = response.data;
+  const response = await api.get('/users/me');
+  console.log("🔐 Usuário logado:", response.data);
   return response.data;
 };
 
@@ -35,12 +35,11 @@ export const signup = async (data: SignupData) => {
 // salvar o token no AsyncStorage e o usuário atual
 export const login = async (data: LoginData) => {
   const response = await api.post('/auth/login', data);
-  const { token, user } = response.data;
+  const { token } = response.data;
 
   await AsyncStorage.setItem('authToken', token);
-  currentUser = user;
 
-  return user;
+  return token;
 };
 
 // remover o token quando usuário sair

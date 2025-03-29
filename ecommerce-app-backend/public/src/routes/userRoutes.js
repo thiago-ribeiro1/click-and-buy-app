@@ -26,6 +26,22 @@ router.get("/", authMiddleware, usersController.getUsers);
 
 /**
  * @swagger
+ * /api/users/me:
+ *   get:
+ *     summary: Get the current logged-in user
+ *     tags: [Users]
+ *     responses:
+ *       200:
+ *         description: User info returned
+ *       401:
+ *         description: Unauthorized
+ *       500:
+ *         description: Server error
+ */
+router.get("/me", authMiddleware, usersController.getCurrentUser);
+
+/**
+ * @swagger
  * /api/users:
  *   post:
  *     summary: Add a new user
