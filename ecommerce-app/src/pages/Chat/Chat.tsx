@@ -1,25 +1,39 @@
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import { View, TextInput, Text, ScrollView, SafeAreaView, TouchableOpacity } from 'react-native';
 import Balloon from './Ballon';
 import styles from './ChatStyle';
-import { useRoute, useNavigation } from "@react-navigation/native";
+import { useNavigation } from "@react-navigation/native";
 import { StackNavigationProp } from '@react-navigation/stack';
 import { RootStackParamList } from "../../NavigationTypes/navigationTypes";
 import { Ionicons } from '@expo/vector-icons';
+import { getCurrentUser } from '../../services/authService'; // importar o usuário atual 
 
 const Chat = () => {
   const [chat, setChat] = useState<{ messages: { content: string; sentBy: string }[] }>({ messages: [] });
   const [message, setMessage] = useState('');
+  const [chatName, setChatName] = useState<string | null>(null);
   const scrollViewRef = useRef<ScrollView>(null);
-
-  const route = useRoute();
-  const { chatName } = route.params as { chatName: string };
 
   type ChatScreenNavigationProp = StackNavigationProp<RootStackParamList, "Chat">;
   const navigation = useNavigation<ChatScreenNavigationProp>();
 
+  useEffect(() => {
+    const fetchUser = async () => {
+      try {
+        const user = await getCurrentUser(); // Obter o usuário atual 
+        if (user?.name) {
+          setChatName(user.name); // Definir o nome do usuário no chatname
+        }
+      } catch (error) {
+        console.error('Erro ao obter usuário:', error);
+      }
+    };
+
+    fetchUser();
+  }, []);
+
   const sendMessage = () => {
-    if (!message.trim()) return;
+    if (!message.trim() || !chatName) return;
 
     const newMessage = {
       content: message,
@@ -29,6 +43,10 @@ const Chat = () => {
     setChat(prev => ({ messages: [...prev.messages, newMessage] }));
     setMessage('');
   };
+
+  if (!chatName) {
+    return null;
+  }
 
   return (
     <>

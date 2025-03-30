@@ -12,6 +12,5 @@ export type RootStackParamList = {
     price: number;
     image: any;
   };    
-  Chat: { chatName: string };
-  ChatName: undefined;
+  Chat: undefined;
 };

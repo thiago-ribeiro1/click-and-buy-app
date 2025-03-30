@@ -13,11 +13,11 @@ import Profile from "./src/pages/Profile/Profile";
 import MyOrders from "./src/pages/MyOrders/MyOrders";
 import ProductDetails from "./src/pages/ProductDetails/ProductDetails";
 import Toast from "react-native-toast-message";
+import Chat from "./src/pages/Chat/Chat";
 
 // Importa contexto de autenticação
 import { AuthProvider, useAuth } from "./src/services/AuthContext";
-import Chat from "./src/pages/Chat/Chat";
-import ChatName from "./src/pages/Chat/ChatName";
+
 
 // Criação do Stack Navigator tipado com RootStackParamList
 const Stack = createStackNavigator<RootStackParamList>();
@@ -85,11 +85,6 @@ function Routes() {
             component={Chat}
             options={{ headerShown: false }}
           />
-          <Stack.Screen
-            name="ChatName"
-            component={ChatName}
-            options={{ headerShown: false }}
-            />
         </>
       )}
     </Stack.Navigator>

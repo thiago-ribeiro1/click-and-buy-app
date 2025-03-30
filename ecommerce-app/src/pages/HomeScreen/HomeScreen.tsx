@@ -73,7 +73,7 @@ const Homepage: React.FC = () => {
 
       {menuVisible && (
         <View style={styles.MenuContainer}>
-          <TouchableOpacity onPress={() => navigation.navigate("ChatName")} style={styles.MenuItem}>
+          <TouchableOpacity onPress={() => navigation.navigate("Chat")} style={styles.MenuItem}>
             <Text style={styles.MenuText}>Conversar com a IA</Text>
           </TouchableOpacity>
           <TouchableOpacity onPress={() => navigation.navigate("MyOrders")} style={styles.MenuItem}>
