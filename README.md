@@ -30,6 +30,20 @@ Aplicação mobile desenvolvida em **React Native** e backend em **Node.js**, qu
 - Node.js instalado (recomendável versão 23)
 - Fazer download do app "Expo Go" para exibição da interface
 
+> ⚠️ **Importante:** Para o correto funcionamento da aplicação, é necessário que o backend esteja em execução **junto com o frontend**.  
+>
+> No arquivo `src/services/httpService.ts`, substitua `IP-LOCAL` pelo **IP da sua máquina** na linha:
+>
+> ```ts
+> baseURL: 'http://IP-LOCAL:3000/api'
+> ```
+> Exemplo:
+> ```ts
+> baseURL: 'http://192.168.0.105:3000/api'
+> ```
+> Isso garante que o app mobile consiga se comunicar com o servidor corretamente via rede local.
+> Veja como executar o backend 🔗 [Aqui](https://github.com/thiago-ribeiro1/click-and-buy-app/blob/main/DocumentationBackend.md)
+
 ### 1️⃣ Expo CLI instalado
 
 ```bash
