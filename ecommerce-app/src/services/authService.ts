@@ -19,7 +19,8 @@ export interface LoginData {
 // obter o usuário atual
 export const getCurrentUser = async () => {
   const response = await api.get('/users/me');
-  console.log("🔐 Usuário logado:", response.data);
+  const { _id, name, email, cpf, username, image } = response.data;
+  console.log("🔐 Usuário logado:", { _id, name, email, cpf, username });
   return response.data;
 };
 

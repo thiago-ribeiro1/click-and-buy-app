@@ -1,11 +1,11 @@
-const Profile = require('../models/Profile');
-const User = require('../models/User');
+const Profile = require("../models/Profile");
+const User = require("../models/User");
 
 exports.updateProfileImage = async (req, res) => {
   const { userId, image } = req.body;
 
   if (!userId || !image) {
-    return res.status(400).json({ message: 'Missing userId or image' });
+    return res.status(400).json({ message: "Missing userId or image" });
   }
 
   try {
@@ -24,10 +24,12 @@ exports.updateProfileImage = async (req, res) => {
       await user.save();
     }
 
-    res.status(200).json({ message: 'Profile image updated successfully', profile });
+    res
+      .status(200)
+      .json({ message: "Profile image updated successfully", profile });
   } catch (error) {
-    console.error('Error updating profile image:', error);
-    res.status(500).json({ message: 'Error updating profile image' });
+    console.error("Error updating profile image:", error);
+    res.status(500).json({ message: "Error updating profile image" });
   }
 };
 
@@ -51,8 +53,25 @@ exports.updateProfile = async (req, res) => {
       await user.save();
     }
 
-    res.status(200).json({ message: 'Profile updated successfully', profile });
+    res.status(200).json({ message: "Profile updated successfully", profile });
   } catch (error) {
-    res.status(500).json({ message: 'Error updating profile', error });
+    res.status(500).json({ message: "Error updating profile", error });
+  }
+};
+
+exports.getProfileByUserId = async (req, res) => {
+  const { userId } = req.params;
+
+  try {
+    const profile = await Profile.findOne({ user: userId });
+
+    if (!profile) {
+      return res.status(404).json({ message: "Profile not found" });
+    }
+
+    res.status(200).json(profile);
+  } catch (error) {
+    console.error("Error fetching profile:", error);
+    res.status(500).json({ message: "Error fetching profile" });
   }
 };

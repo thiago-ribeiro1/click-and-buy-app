@@ -1,6 +1,6 @@
-const express = require('express');
+const express = require("express");
 const router = express.Router();
-const profileController = require('../controllers/profileController');
+const profileController = require("../controllers/profileController");
 const authMiddleware = require("../middlewares/authMiddleware");
 
 /**
@@ -39,7 +39,11 @@ const authMiddleware = require("../middlewares/authMiddleware");
  *       500:
  *         description: Server error
  */
-router.post('/update-image', authMiddleware, profileController.updateProfileImage);
+router.post(
+  "/update-image",
+  authMiddleware,
+  profileController.updateProfileImage
+);
 
 /**
  * @swagger
@@ -69,6 +73,44 @@ router.post('/update-image', authMiddleware, profileController.updateProfileImag
  *       500:
  *         description: Server error
  */
-router.post('/update', authMiddleware, profileController.updateProfile);
+router.post("/update", authMiddleware, profileController.updateProfile);
+
+/**
+ * @swagger
+ * /api/profile/{userId}:
+ *   get:
+ *     summary: Get user profile by userId
+ *     tags: [Profile]
+ *     parameters:
+ *       - in: path
+ *         name: userId
+ *         required: true
+ *         schema:
+ *           type: string
+ *         description: The ID of the user
+ *     responses:
+ *       200:
+ *         description: Profile retrieved successfully
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 _id:
+ *                   type: string
+ *                 user:
+ *                   type: string
+ *                 profileImage:
+ *                   type: string
+ *                 address:
+ *                   type: string
+ *                 phone:
+ *                   type: string
+ *       404:
+ *         description: Profile not found
+ *       500:
+ *         description: Server error
+ */
+router.get("/:userId", authMiddleware, profileController.getProfileByUserId);
 
 module.exports = router;

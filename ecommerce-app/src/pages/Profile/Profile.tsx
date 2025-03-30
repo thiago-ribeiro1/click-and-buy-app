@@ -7,6 +7,7 @@ import styles from "./ProfileStyle";
 import * as ImagePicker from "expo-image-picker";
 import { updateProfileImage } from "../../services/profileService";
 import { getCurrentUser } from "../../services/authService"; // Importa a função para obter o usuário atual
+import { getUserProfileImage } from "../../services/profileService"; // Importa a função para obter a imagem do perfil	
 
 const Profile: React.FC = () => {
   // Define a navegação para esta tela
@@ -22,30 +23,53 @@ const Profile: React.FC = () => {
   useEffect(() => {
     const fetchProfile = async () => {
       try {
-        const user = await getCurrentUser();
-        setProfile(user);
-        if (user?.image) setProfileImage(user.image);
+        const user = await getCurrentUser(); // pegar o usuário atual 
+        setProfile(user); // Atualiza o estado do perfil com os dados do usuário atual
+  
+        let fetchedImage = // Tenta obter a imagem do perfil do usuário
+          user?.image || user?.profile?.profileImage || null;
+  
+        // Se a imagem não estiver disponível, tenta buscar a imagem do perfil 
+        if (!fetchedImage && user?._id) {
+          fetchedImage = await getUserProfileImage(user._id); // se não encontrar a imagem, tenta buscar no backend
+        }
+  
+        setProfileImage(fetchedImage); // Atualiza o estado da imagem do perfil
       } catch (error) {
-        console.error("Erro ao obter o perfil:", error);
+        console.error("Failed to fetch profile:", error);
       }
     };
+  
     fetchProfile();
-  }, []);
+  }, []);      
 
+  // Função para abrir o seletor de imagens
   const pickImage = async () => {
-    const result = await ImagePicker.launchImageLibraryAsync({
-      mediaTypes: ImagePicker.MediaTypeOptions.Images,
-      allowsEditing: true,
-      base64: true,
-      quality: 1,
-    });
+  const result = await ImagePicker.launchImageLibraryAsync({
+    mediaTypes: ['images'], 
+    allowsEditing: true,
+    base64: true,
+    quality: 1,
+  });
 
-    if (!result.canceled && result.assets?.[0]?.base64) {
-      const base64Img = result.assets[0].base64;
-      await updateProfileImage(base64Img); // envia para o backend
-      setProfileImage(base64Img); // atualiza visualmente
+  // Verifica se o usuário cancelou a seleção ou se não há imagem selecionada 
+  if (!result.canceled && result.assets?.[0]?.base64) {
+    const base64Img = result.assets[0].base64;
+
+    try {
+      if (!profile?._id) {
+        console.warn("Usuário não carregado ainda.");
+        return;
+      }
+
+      // Verifica se a imagem já é a mesma
+      await updateProfileImage(profile._id, base64Img); 
+      setProfileImage(base64Img); // Envia a imagem para o backend base64
+    } catch (error) {
+      console.error("Erro ao atualizar imagem de perfil:", error);
     }
-  };
+  }
+};
 
   return (
     <View style={styles.container}>
@@ -102,3 +126,4 @@ const Profile: React.FC = () => {
 };
 
 export default Profile;
+ 
