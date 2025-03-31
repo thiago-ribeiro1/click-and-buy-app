@@ -1,4 +1,4 @@
-import React, { useState, useRef, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { View, TextInput, Text, ScrollView, SafeAreaView, TouchableOpacity } from 'react-native';
 import Balloon from './Ballon';
 import styles from './ChatStyle';
@@ -32,21 +32,47 @@ const Chat = () => {
     fetchUser();
   }, []);
 
-  const sendMessage = () => {
-    if (!message.trim() || !chatName) return;
+// Configuração do WebSocket 
+const ws = useRef<WebSocket | null>(null); // WebSocket como ref  
 
-    const newMessage = {
-      content: message,
-      sentBy: chatName,
-    };
+useEffect(() => {
+  if (!chatName) return; // Aguarda carregar o nome do usuário 
 
-    setChat(prev => ({ messages: [...prev.messages, newMessage] }));
-    setMessage('');
+  // Criar conexão com WebSocket
+  ws.current = new WebSocket('ws://IP-LOCAL:3000'); // IP Local substitua pelo IP da sua máquina 
+
+  ws.current.onopen = () => {
+    console.log("Cliente conectado ao socket com sucesso");
   };
 
-  if (!chatName) {
-    return null;
-  }
+  ws.current.onmessage = ({ data }) => {
+    // Receber mensagem do servidor
+    const newMessage = JSON.parse(data);
+    setChat(prev => ({ messages: [...prev.messages, newMessage] })); // adiciona nova mensagem ao chat 
+
+    setMessage(''); // limpa a mensagem
+  };
+
+  ws.current.onerror = (err) => {
+    console.error("Erro no WebSocket:", err);
+  };
+
+  return () => {
+    ws.current?.close(); // Encerra a conexão ao sair da tela 
+  };
+}, [chatName]);
+
+// Envio separado — com acesso ao estado atualizado
+const handleSend = () => {
+  if (!message.trim() || !chatName || !ws.current) return;
+
+  const jsonString = JSON.stringify({
+    content: message,
+    sentBy: chatName,
+  });
+
+  ws.current.send(jsonString); // Envia via WebSocket
+};
 
   return (
     <>
@@ -82,7 +108,7 @@ const Chat = () => {
             multiline
           />
           <TouchableOpacity
-            onPress={sendMessage}
+            onPress={handleSend}
             style={styles.sendButton}
             disabled={!message.trim()}
           >

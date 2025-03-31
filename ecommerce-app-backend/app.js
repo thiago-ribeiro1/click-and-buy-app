@@ -1,6 +1,8 @@
 const express = require("express");
 const mongoose = require("mongoose");
 const cors = require("cors");
+const http = require("http");
+const { WebSocketServer } = require("ws");
 require("dotenv").config();
 
 const authRoutes = require("./public/src/routes/authRoutes");
@@ -13,6 +15,7 @@ const swaggerJsDoc = require("swagger-jsdoc");
 const swaggerUi = require("swagger-ui-express");
 
 const app = express();
+const server = http.createServer(app); // Create HTTP server for WebSocket
 
 app.use(express.json({ limit: "10mb" }));
 app.use(cors());
@@ -65,8 +68,31 @@ app.use("/api/products", productRoutes);
 app.use("/api/orders", orderRoutes);
 app.use("/api/profile", profileRoutes);
 
+// WebSocket Server
+const wss = new WebSocketServer({ server });
+
+wss.on("connection", (socket) => {
+  console.log("Client connected on WebSocket");
+
+  socket.on("message", (message) => {
+    // message event
+    console.log("Message received:", message.toString()); // convert to string
+
+    // Broadcast para todos os clientes
+    wss.clients.forEach((client) => {
+      if (client.readyState === socket.OPEN) {
+        client.send(message.toString());
+      }
+    });
+  });
+
+  socket.on("close", () => {
+    console.log("Client disconnected from WebSocket");
+  });
+});
+
 const PORT = process.env.PORT || 3000;
-app.listen(PORT, () => {
+server.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`);
   console.log(
     `Swagger documentation available at http://localhost:${PORT}/api-docs`

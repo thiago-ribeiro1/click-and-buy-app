@@ -22,7 +22,7 @@ const Balloon = ({ message, currentUser }: any) => {
         <Text style={{ fontSize: 14, fontWeight: 'bold', color: '#000', marginBottom: 2 }}>
           {message.sentBy}
         </Text>
-        <Text style={{ color: '#fff', fontSize: 18 }}>
+        <Text style={{ color: '#000', fontSize: 18 }}>
           {message.content}
         </Text>
         </View>
