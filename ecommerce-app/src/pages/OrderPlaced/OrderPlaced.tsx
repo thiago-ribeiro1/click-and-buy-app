@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import { Image, Text, Touchable, TouchableOpacity, View } from "react-native";
+import { Image, Text, View, StatusBar } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 import { StackNavigationProp } from "@react-navigation/stack";
 import { RootStackParamList } from "../../NavigationTypes/navigationTypes";
@@ -24,6 +24,7 @@ const OrderPlaced: React.FC = () => {
 
   return (
     <View style={styles.container}>
+      <StatusBar backgroundColor="#c6f7f1" barStyle="light-content" />
       {/* Fundo Azul + Imagem */}
       <Image
         style={styles.backgroundImage}
