@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Image, Text, View, TextInput, TouchableOpacity, ScrollView } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 import { StackNavigationProp } from "@react-navigation/stack";
@@ -6,6 +6,8 @@ import { RootStackParamList } from "../../NavigationTypes/navigationTypes";
 import styles from "./HomeScreenStyle";
 import { useCart } from "../Cart/CartContext"; // Importando o contexto
 import { useAuth } from "../../services/AuthContext"; // Importando o contexto autenticação
+import { getUserProfileImage } from "../../services/profileService";
+import { currentUser, getCurrentUser } from "../../services/authService";
 
 
 const Homepage: React.FC = () => {
@@ -14,6 +16,36 @@ const Homepage: React.FC = () => {
   const { addToCart } = useCart(); // Pega a função de adicionar ao carrinho
   const { logout } = useAuth(); // Função de logout
   const [menuVisible, setMenuVisible] = useState(false);
+
+  const [profileImage, setProfileImage] = useState<string | null>(null);
+
+  // Função para buscar a imagem do perfil do usuário 
+  useEffect(() => {
+    const fetchProfileImage = async () => {
+      try {
+        const currentUser = await getCurrentUser();
+        if (!currentUser || !currentUser._id) {
+          console.warn("Usuário não encontrado ou sem ID.");
+          return;
+        }
+  
+        const imageBase64 = await getUserProfileImage(currentUser._id);
+  
+        if (imageBase64) {
+          // Garantimos que está em base64 
+          setProfileImage(`data:image/jpeg;base64,${imageBase64}`);
+        } else {
+          // Se não houver imagem no banco, usa o avatar padrão
+          setProfileImage(null);
+        }
+  
+      } catch (error) {
+        console.error("Erro ao buscar imagem do perfil:", error);
+      }
+    };
+  
+    fetchProfileImage();
+  }, []);  
 
   const toggleMenu = () => setMenuVisible(!menuVisible);
 
@@ -59,7 +91,14 @@ const Homepage: React.FC = () => {
 
         {/* Avatar */}
         <TouchableOpacity onPress={() => navigation.navigate("Profile")}>
-        <Image style={styles.Avatar} source={require("../../../assets/img/avatar.png")} />
+          <Image
+            style={styles.Avatar}
+            source={
+              profileImage
+                ? { uri: profileImage }
+                : require("../../../assets/img/avatar.png")
+            }
+          />
         </TouchableOpacity>
         
         {/* Logo */}  
