@@ -131,7 +131,7 @@ Tela para login e criação de novos usuários.
 ### 🔹 HomeScreen
 Exibição dos produtos disponíveis.
 
-### 🔹 Profile (⚙️ Status: Em desenvolvimento)
+### 🔹 Profile
 Tela com informações do usuário logado.
 
 ### 🔹 Detalhes Produto (⚙️ Status: Em desenvolvimento)
