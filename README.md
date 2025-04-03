@@ -109,6 +109,8 @@ ECOMMERCE-APP/
 │       ├── AuthContext.tsx   # Contexto global de autenticação
 │       ├── authService.ts    # Funções relacionadas à autenticação (login, registro)
 │       └── httpService.ts    # Configuração do cliente HTTP (axios, fetch, etc.)
+│       └── orderService.ts    # Funções relacionadas a pedidos (endpoints)
+│       └── profileService.ts  # Funções relacionadas ao profile (endpoints)
 │── .gitignore            # Arquivo para ignorar arquivos no Git
 │── app.json              # Configurações do aplicativo Expo
 │── App.tsx               # Componente raiz do aplicativo
