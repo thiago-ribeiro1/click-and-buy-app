@@ -102,7 +102,6 @@ ECOMMERCE-APP/
 │   │   ├── Login/            # Tela de login
 │   │   ├── MyOrders/         # Tela com histórico de pedidos do usuário
 │   │   ├── OrderPlaced/      # Tela de confirmação de pedido realizado
-│   │   ├── ProductDetails/   # Tela com detalhes de um produto selecionado
 │   │   ├── Profile/          # Tela de perfil do usuário
 │   │   ├── Register/         # Tela de cadastro de novo usuário
 │   │   └── SplashScreen/     # Tela inicial de carregamento
@@ -134,10 +133,7 @@ Exibição dos produtos disponíveis.
 ### 🔹 Profile
 Tela com informações do usuário logado.
 
-### 🔹 Detalhes Produto (⚙️ Status: Em desenvolvimento)
-Exibe informações de um produto específico.
-
-### 🔹 Pedidos (⚙️ Status: Em desenvolvimento)
+### 🔹 Pedidos 
 Pedidos de um usuário específico.
 
 ### 🔹 Carrinho
@@ -145,3 +141,9 @@ Lista dos produtos adicionados ao carrinho, com opções para remover itens e fi
 
 ### 🔹 Pedido Finalizado
 Informa ao usuário que o pedido foi finalizado, completando o processo de compra.
+
+### 🔹 FAQ
+Chat em tempo real entre clientes, utilizando comunicação via WebSocket.
+
+### 🔹 Chat IA (⚙️ Status: Em desenvolvimento)
+Chat inteligente para interação com uma IA, permitindo tirar dúvidas sobre produtos cadastrados pelo usuário.
