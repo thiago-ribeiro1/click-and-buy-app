@@ -7,6 +7,7 @@ interface CartItem {
   price: number;
   image: any;
   quantity: number;
+  productCode: string; 
 }
 
 // Tipagem do Contexto

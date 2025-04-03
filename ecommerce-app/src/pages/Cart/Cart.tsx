@@ -5,6 +5,8 @@ import { StackNavigationProp } from "@react-navigation/stack";
 import { RootStackParamList } from "../../NavigationTypes/navigationTypes";
 import styles from "./CartStyle";
 import { useCart } from "../Cart/CartContext"; // Importa o contexto do carrinho
+import { getCurrentUser } from "../../services/authService"; 
+import { createOrder } from "../../services/orderSerivce";
 
 const Cart: React.FC = () => {
   type CartScreenNavigationProp = StackNavigationProp<RootStackParamList, "Cart">;
@@ -12,6 +14,22 @@ const Cart: React.FC = () => {
 
   const { cartItems, removeFromCart, total } = useCart(); // Pega os produtos do carrinho
   const isCartEmpty = cartItems.length === 0; // Define se o carrinho está vazio
+
+  const handleFinalizeOrder = async () => {
+    try {
+      const currentUser = await getCurrentUser(); 
+      const orderData = {
+        productCodes: cartItems.map(item => item.productCode), // Pega o código do produto
+        userId: currentUser?._id, // Pega o ID do usuário
+      }
+
+      await createOrder(orderData);
+      navigation.navigate("OrderPlaced"); // Navega para a tela de pedido concluído
+    } catch (error) {
+      console.error("Erro ao finalizar pedido:", error);
+      alert("Não foi possível finalizar o pedido. Tente novamente.");
+    }
+  }
 
   return (
     <View style={styles.container}>
@@ -75,7 +93,7 @@ const Cart: React.FC = () => {
           </View>
 
           {/* Botão Finalizar Pedido */}
-          <TouchableOpacity onPress={() => navigation.navigate("OrderPlaced")} style={styles.finalizarBtn}>
+          <TouchableOpacity onPress={handleFinalizeOrder} style={styles.finalizarBtn}>
             <Text style={styles.finalizarText}>Finalizar Pedido</Text>
           </TouchableOpacity>
         </>

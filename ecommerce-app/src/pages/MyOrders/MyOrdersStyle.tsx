@@ -50,12 +50,12 @@ export default StyleSheet.create({
   },
   orderImage: {
     width: "100%",
-    height: 120,
+    height: 110,
     resizeMode: "contain",
     marginBottom: 10,
   },
   orderTitle: {
-    fontSize: 15,
+    fontSize: 13,
     fontWeight: "500",
     color: "#272727",
     textAlign: "center",

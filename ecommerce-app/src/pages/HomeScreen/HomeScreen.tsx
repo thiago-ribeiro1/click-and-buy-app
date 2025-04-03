@@ -7,7 +7,7 @@ import styles from "./HomeScreenStyle";
 import { useCart } from "../Cart/CartContext"; // Importando o contexto
 import { useAuth } from "../../services/AuthContext"; // Importando o contexto autenticação
 import { getUserProfileImage } from "../../services/profileService";
-import { currentUser, getCurrentUser } from "../../services/authService";
+import { getCurrentUser } from "../../services/authService";
 import products from "../Data/products"; // Importando os produtos
 
 
@@ -51,8 +51,8 @@ const Homepage: React.FC = () => {
   const toggleMenu = () => setMenuVisible(!menuVisible);
 
   // Função para adicionar ao carrinho e redirecionar para a tela do carrinho
-  const handleAddToCart = (product: { id: string; title: string; price: number; image: any }) => {
-    addToCart({ ...product, quantity: 1 });
+  const handleAddToCart = (product: { id: string; title: string; price: number; image: any, productCode: string }) => {
+    addToCart({ ...product, quantity: 1, productCode: product.productCode });
     navigation.navigate("Cart"); // Redireciona para a tela do carrinho após adicionar
   };
 

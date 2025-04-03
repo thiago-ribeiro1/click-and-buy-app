@@ -80,4 +80,45 @@ router.get("/:id", authMiddleware, ordersController.getOrderById);
  */
 router.post("/", authMiddleware, ordersController.createOrder);
 
+/**
+ * @swagger
+ * /api/orders/user/{userId}:
+ *   get:
+ *     summary: Retorna todos os pedidos de um usuário
+ *     tags: [Orders]
+ *     parameters:
+ *       - in: path
+ *         name: userId
+ *         schema:
+ *           type: string
+ *         required: true
+ *         description: ID do usuário
+ *     responses:
+ *       200:
+ *         description: Lista de pedidos do usuário
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: array
+ *               items:
+ *                 type: object
+ *                 properties:
+ *                   _id:
+ *                     type: string
+ *                   total:
+ *                     type: number
+ *                   orderDate:
+ *                     type: string
+ *                     format: date-time
+ *                   products:
+ *                     type: array
+ *                     items:
+ *                       type: object
+ *                   user:
+ *                     type: string
+ *       500:
+ *         description: Erro ao buscar pedidos
+ */
+router.get("/user/:userId", ordersController.getOrdersByUser);
+
 module.exports = router;
