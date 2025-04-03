@@ -11,7 +11,6 @@ import { CartProvider } from "./src/pages/Cart/CartContext";
 import OrderPlaced from "./src/pages/OrderPlaced/OrderPlaced";
 import Profile from "./src/pages/Profile/Profile";
 import MyOrders from "./src/pages/MyOrders/MyOrders";
-import ProductDetails from "./src/pages/ProductDetails/ProductDetails";
 import Toast from "react-native-toast-message";
 import Chat from "./src/pages/Chat/Chat";
 
@@ -73,11 +72,6 @@ function Routes() {
           <Stack.Screen
             name="MyOrders"
             component={MyOrders}
-            options={{ headerShown: false }}
-          />
-          <Stack.Screen
-            name="ProductDetails"
-            component={ProductDetails}
             options={{ headerShown: false }}
           />
           <Stack.Screen
