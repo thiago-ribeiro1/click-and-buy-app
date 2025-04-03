@@ -146,4 +146,4 @@ Informa ao usuário que o pedido foi finalizado, completando o processo de compr
 Chat em tempo real entre clientes, utilizando comunicação via WebSocket.
 
 ### 🔹 Chat IA (⚙️ Status: Em desenvolvimento)
-Chat inteligente para interação com uma IA, permitindo tirar dúvidas sobre produtos cadastrados pelo usuário.
+Chat inteligente para interação com uma IA, permitindo pesquisar sobre pedidos de um usuário.
