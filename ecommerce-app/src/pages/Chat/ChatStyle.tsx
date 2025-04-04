@@ -25,6 +25,9 @@ const styles = StyleSheet.create({
     backgroundColor: '#4fd1c5',
     borderRadius: 20,
     padding: 10,
+    width: 60, 
+    alignItems: 'center',
+    justifyContent: 'center',
   },
   bubbleWrapper: {
     flexDirection: 'column',
