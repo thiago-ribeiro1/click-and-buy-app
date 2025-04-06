@@ -35,6 +35,7 @@ docker-compose up -d
 ```env
 PORT=3000
 JWT_SECRET=YourJwtSecretHere
+GOOGLE_API_KEY=YourAPIKeyForGemini
 ```
 
 ## Running the Application
