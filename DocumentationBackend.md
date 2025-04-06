@@ -35,8 +35,10 @@ docker-compose up -d
 ```env
 PORT=3000
 JWT_SECRET=YourJwtSecretHere
-GOOGLE_API_KEY=YourAPIKeyForGemini
+GOOGLE_API_KEY=your_google_gemini_api_key
 ```
+
+- To use the Gemini API, you need to set your API key as an environment variable on your machine
 
 ## Running the Application
 
