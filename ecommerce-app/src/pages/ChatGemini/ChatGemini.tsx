@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { View, Text, TextInput, TouchableOpacity, Image, ScrollView } from 'react-native';
 import styles from './ChatGeminiStyle'; 
 import { LinearGradient } from 'expo-linear-gradient';
@@ -23,6 +23,7 @@ const GeminiScreen = () => {
   const [input, setInput] = useState('');
   const [loading, setLoading] = useState(false);
   const [userId, setUserId] = useState<string | null>(null);
+  const scrollViewRef = useRef<ScrollView>(null);
 
   type ChatGeminiNavigationProp = StackNavigationProp<RootStackParamList, "ChatGemini">;
     const navigation = useNavigation<ChatGeminiNavigationProp>();
@@ -42,6 +43,12 @@ const GeminiScreen = () => {
     fetchUser();
   }, []);
 
+  useEffect(() => {
+    if (scrollViewRef.current) {
+      scrollViewRef.current.scrollToEnd({ animated: true });
+    }
+  }, [messages]);
+  
   const handleSend = async () => {
     if (!input.trim() || !userId) return;
 
@@ -62,9 +69,8 @@ const GeminiScreen = () => {
 
   return (
     
-    <LinearGradient colors={['#0f0c29', '#302b63', '#24243e']}
-        style={styles.container}>
-
+    <LinearGradient colors={['#000000', '#0a0f2c', '#0d1b3d']} style={styles.container}>
+ 
     <TouchableOpacity
         onPress={() => navigation.goBack()}
         style={{ position: 'absolute', top: 10, left: 15, zIndex: 1, marginTop: 50 }}>
@@ -72,12 +78,12 @@ const GeminiScreen = () => {
       </TouchableOpacity>
             
       <View style={styles.header}>
-        <StatusBar backgroundColor="#0f0c29"/>
+        <StatusBar backgroundColor="#000000"/>
         <Image source={require('../../../assets/img/Google_Gemini_logo.png')} style={styles.logo} />
         <Text style={styles.title}>Ask Gemini</Text>
       </View>
       
-      <ScrollView style={styles.chat}>
+      <ScrollView style={styles.chat} ref={scrollViewRef}>
         {messages.map((msg, index) => (
           <View
             key={index}
