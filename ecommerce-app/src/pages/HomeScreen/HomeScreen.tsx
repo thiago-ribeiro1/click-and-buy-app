@@ -100,6 +100,9 @@ const Homepage: React.FC = () => {
 
       {menuVisible && (
         <View style={styles.MenuContainer}>
+          <TouchableOpacity onPress={() => navigation.navigate("ChatGemini")} style={styles.MenuItem}>
+            <Text style={styles.MenuText}>Chat Gemini</Text>
+            </TouchableOpacity> 
           <TouchableOpacity onPress={() => navigation.navigate("Chat")} style={styles.MenuItem}>
             <Text style={styles.MenuText}>FAQ</Text>
           </TouchableOpacity>

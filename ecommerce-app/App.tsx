@@ -13,6 +13,7 @@ import Profile from "./src/pages/Profile/Profile";
 import MyOrders from "./src/pages/MyOrders/MyOrders";
 import Toast from "react-native-toast-message";
 import Chat from "./src/pages/Chat/Chat";
+import ChatGemini from "./src/pages/ChatGemini/ChatGemini";
 
 // Importa contexto de autenticação
 import { AuthProvider, useAuth } from "./src/services/AuthContext";
@@ -77,6 +78,11 @@ function Routes() {
           <Stack.Screen
             name="Chat"
             component={Chat}
+            options={{ headerShown: false }}
+          />
+          <Stack.Screen
+            name="ChatGemini"
+            component={ChatGemini}
             options={{ headerShown: false }}
           />
         </>

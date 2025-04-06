@@ -20,7 +20,7 @@ export interface LoginData {
 export const getCurrentUser = async () => {
   const response = await api.get('/users/me');
   const { _id, name, email, cpf, username, image } = response.data;
-  console.log("🔐 Usuário logado:", { _id, name, email, cpf, username });
+  console.log("🔐 Usuário logado:", { _id, name, username });
   return response.data;
 };
 

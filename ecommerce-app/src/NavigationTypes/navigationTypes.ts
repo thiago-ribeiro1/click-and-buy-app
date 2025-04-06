@@ -13,4 +13,5 @@ export type RootStackParamList = {
     image: any;
   };    
   Chat: undefined;
+  ChatGemini: undefined; 
 };
