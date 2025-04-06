@@ -1,4 +1,5 @@
-const User = require("../models/User");
+const User = require("../models/User.js");
+const aiService = require("../../../services/IaService");
 
 exports.getUsers = async (req, res) => {
   try {
@@ -74,5 +75,15 @@ exports.deleteUser = async (req, res) => {
   } catch (error) {
     console.error(error);
     res.status(500).json({ message: "Error deleting user" });
+  }
+};
+
+exports.promptWithGemini = async (req, res) => {
+  try {
+    const { userId, prompt } = req.body;
+    const result = await aiService.processUserQuestion(userId, prompt); // chama a função do IA Service
+    res.status(200).json(result.text().trim());
+  } catch (error) {
+    res.status(500).json({ message: error.message });
   }
 };

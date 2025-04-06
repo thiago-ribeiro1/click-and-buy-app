@@ -142,4 +142,41 @@ router.put("/:username", authMiddleware, usersController.updateUser);
  */
 router.delete("/:username", authMiddleware, usersController.deleteUser);
 
+/**
+ * @swagger
+ * /api/users/ia:
+ *   post:
+ *     summary: Ask a question about user orders to Gemini AI.
+ *     tags: [IA]
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             properties:
+ *               userId:
+ *                 type: string
+ *                 example: "661f084fe33a84a65b04875d"
+ *               prompt:
+ *                 type: string
+ *                 example: "Quantos pedidos eu fiz em 2025?"
+ *     responses:
+ *       200:
+ *         description: AI response successful
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 resposta:
+ *                   type: string
+ *                   example: "Você fez 4 pedidos em 2025."
+ *       500:
+ *         description: Erro ao processar o prompt
+ */
+router
+  .route("/ia")
+  .post((req, res) => usersController.promptWithGemini(req, res));
+
 module.exports = router;
