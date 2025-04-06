@@ -84,7 +84,7 @@ router.post("/", authMiddleware, ordersController.createOrder);
  * @swagger
  * /api/orders/user/{userId}:
  *   get:
- *     summary: Retorna todos os pedidos de um usuário
+ *     summary: Returns all orders for a user
  *     tags: [Orders]
  *     parameters:
  *       - in: path
