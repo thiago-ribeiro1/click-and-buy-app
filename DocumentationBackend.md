@@ -10,8 +10,8 @@
 
 1. **Clone the Repository:**
    ```bash
-   git clone https://github.com/gabriela-silv/projeto-integrar-interfaces-web.git
-   cd projeto-integrar-interfaces-web
+   git clone https://github.com/thiago-ribeiro1/click-and-buy-app
+   cd ecommerce-app-backend
    ```
 
 2. **Install Dependencies:**
