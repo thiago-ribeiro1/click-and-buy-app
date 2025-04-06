@@ -45,6 +45,7 @@ Aplicação mobile desenvolvida em **React Native** e backend em **Node.js**, qu
 ### 1️⃣ Expo CLI instalado
 
 ```bash
+git clone https://github.com/thiago-ribeiro1/click-and-buy-app.git
 cd ecommerce-app
 npm install -g expo-cli
 ```
