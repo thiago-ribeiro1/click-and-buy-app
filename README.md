@@ -1,7 +1,5 @@
 # 🛒 Click&Buy 
 
-### (⚙️ Status: Em desenvolvimento)
-
 Aplicação mobile desenvolvida em **React Native** e backend em **Node.js**, que permite aos usuários se cadastrarem, efetuarem login, visualizar produtos, adicionar ao carrinho, remover produtos e finalizar pedidos.
 
 <img src="https://img.shields.io/badge/React_Native-20232A?style=for-the-badge&logo=react&logoColor=61DAFB" alt="React Native" />
@@ -98,6 +96,7 @@ ECOMMERCE-APP/
 │   ├── pages/            # Páginas do aplicativo
 │   │   ├── Cart/             # Tela do carrinho
 │   │   ├── Chat/             # Chat
+│   │   ├── ChatGemini/       # Conversar com a IA para receber informações de pedidos do usuário atual
 │   │   ├── HomeScreen/       # Tela principal
 │   │   ├── Login/            # Tela de login
 │   │   ├── MyOrders/         # Tela com histórico de pedidos do usuário
@@ -147,5 +146,5 @@ Informa ao usuário que o pedido foi finalizado, completando o processo de compr
 ### 🔹 FAQ
 Chat em tempo real entre clientes, utilizando comunicação via WebSocket.
 
-### 🔹 Chat IA (⚙️ Status: Em desenvolvimento)
+### 🔹 Chat IA 
 Chat inteligente para interação com uma IA, permitindo pesquisar sobre pedidos de um usuário.
