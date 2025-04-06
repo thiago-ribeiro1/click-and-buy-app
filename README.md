@@ -30,10 +30,13 @@ Aplicação mobile desenvolvida em **React Native** e backend em **Node.js**, qu
 
 > ⚠️ **Importante:** Para o correto funcionamento da aplicação, é necessário que o backend esteja em execução **junto com o frontend**.  
 >
-> No arquivo `src/services/httpService.ts`, substitua `IP-LOCAL` pelo **IP da sua máquina** na linha:
+> Nos arquivos `src/services/httpService.ts` e `src/pages/Chat/Chat.tsx`, substitua `IP-LOCAL` pelo **IP da sua máquina** nas linhas:
 >
 > ```ts
 > baseURL: 'http://IP-LOCAL:3000/api'
+> ```
+> ```ts
+> ws.current = new WebSocket('ws://IP-LOCAL:3000'); 
 > ```
 > Exemplo:
 > ```ts
