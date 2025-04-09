@@ -4,6 +4,7 @@ const styles = StyleSheet.create({
   scrollViewContainer: {
     flexGrow: 1,
     padding: 10,
+    paddingTop: 45,
   },
   messageTextInputContainer: {
     flexDirection: 'row',
