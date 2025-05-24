@@ -19,9 +19,12 @@ const Cart: React.FC = () => {
     try {
       const currentUser = await getCurrentUser(); 
       const orderData = {
-        productCodes: cartItems.map(item => item.productCode), // Pega o código do produto
-        userId: currentUser?._id, // Pega o ID do usuário
-      }
+        items: cartItems.map(item => ({
+          productCode: item.productCode,
+          quantity: item.quantity
+        })),
+        userId: currentUser?._id,
+      };
 
       await createOrder(orderData);
       navigation.navigate("OrderPlaced"); // Navega para a tela de pedido concluído
