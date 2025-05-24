@@ -62,14 +62,24 @@ router.get("/:id", authMiddleware, ordersController.getOrderById);
  *             type: object
  *             required:
  *               - userId
- *               - productCodes
+ *               - items
  *             properties:
  *               userId:
  *                 type: string
- *               productCodes:
+ *               items:
  *                 type: array
  *                 items:
- *                   type: string
+ *                   type: object
+ *                   required:
+ *                     - productCode
+ *                     - quantity
+ *                   properties:
+ *                     productCode:
+ *                       type: string
+ *                       description: Product code identifier
+ *                     quantity:
+ *                       type: integer
+ *                       description: Quantity of the product
  *     responses:
  *       201:
  *         description: Order created successfully
@@ -92,10 +102,10 @@ router.post("/", authMiddleware, ordersController.createOrder);
  *         schema:
  *           type: string
  *         required: true
- *         description: ID do usuário
+ *         description: User ID
  *     responses:
  *       200:
- *         description: Lista de pedidos do usuário
+ *         description: User Order List
  *         content:
  *           application/json:
  *             schema:
@@ -110,14 +120,23 @@ router.post("/", authMiddleware, ordersController.createOrder);
  *                   orderDate:
  *                     type: string
  *                     format: date-time
- *                   products:
+ *                   items:
  *                     type: array
  *                     items:
  *                       type: object
+ *                       properties:
+ *                         product:
+ *                           type: string
+ *                         quantity:
+ *                           type: integer
+ *                         unitPrice:
+ *                           type: number
+ *                         subtotal:
+ *                           type: number
  *                   user:
  *                     type: string
  *       500:
- *         description: Erro ao buscar pedidos
+ *         description: Error fetching orders
  */
 router.get("/user/:userId", ordersController.getOrdersByUser);
 
