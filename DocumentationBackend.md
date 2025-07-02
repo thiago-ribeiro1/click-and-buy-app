@@ -44,11 +44,7 @@ GOOGLE_API_KEY=your_google_gemini_api_key
 
 1. **Start the API Server:**
    ```bash
-   npm start
-   ```
-   or, if using nodemon for development:
-   ```bash
-   npm run dev
+   node app.js
    ```
 
 2. **Access the API:**
