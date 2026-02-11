@@ -52,7 +52,7 @@ const MyOrders: React.FC = () => {
           <View key={index} style={styles.orderCard}>
             <Image source={require("../../../assets/img/order.png")} style={styles.orderImage} />
             <Text style={styles.orderTitle}>Pedido #{index + 1} - Total: R${pedido.total.toFixed(2)}</Text>
-            <Text style={styles.orderTitle}>Produtos: {pedido.products.length}</Text>
+            <Text style={styles.orderTitle}>Produtos: {pedido.items?.length ?? 0}</Text>
             <Text style={styles.orderTitle}>Data: {new Date(pedido.orderDate).toLocaleString()}</Text>
           </View>
         ))}
