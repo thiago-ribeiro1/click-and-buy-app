@@ -31,6 +31,21 @@ const products = require("./products.json");
 const app = express();
 const server = http.createServer(app); // Create HTTP server for WebSocket
 
+// Request logger (método, rota, status e duração)
+app.use((req, res, next) => {
+  const start = Date.now();
+
+  res.on("finish", () => {
+    const ms = Date.now() - start;
+    const ts = new Date().toISOString();
+    console.log(
+      `[${ts}] ${req.method} ${req.originalUrl} ${res.statusCode} ${ms}ms`
+    );
+  });
+
+  next();
+});
+
 app.use(express.json({ limit: "10mb" }));
 app.use(cors());
 app.use(express.static("public"));
@@ -108,7 +123,12 @@ wss.on("connection", (socket) => {
 
   socket.on("message", (message) => {
     // message event
-    console.log("Message received:", message.toString()); // convert to string
+    const shouldDebugWs = process.env.WS_DEBUG === "1";
+    if (shouldDebugWs) {
+      const msg = message.toString();
+      const preview = msg.length > 200 ? msg.substring(0, 200) + "..." : msg;
+      console.log(`[WS] message received by ${preview} (${msg.length} chars)`);
+    }
 
     // Broadcast para todos os clientes
     wss.clients.forEach((client) => {
